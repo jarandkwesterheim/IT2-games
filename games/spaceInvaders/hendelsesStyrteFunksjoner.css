@@ -1,0 +1,53 @@
+*{
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0
+}
+body{
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 1080px;
+  width:1440px;
+  overflow: hidden;
+}
+#canvas{
+  cursor: none;
+}
+.chamber-container{
+  width: 80px;
+  height: 370px;
+  background-color: rgb(208, 208, 208);
+  position: absolute;
+  top: 50px;
+  left: 1200px;
+  border: 15px solid rgb(208, 208, 208);
+  border-radius: 15px;
+}
+#chamber{
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+}
+#chamber>img{
+  width: 77px;
+  height: auto;
+  margin: 0;
+}
+#display{
+  position: absolute;
+  top: 50px;
+  left: 92%;
+  color: black;
+  background-color: white;
+  height: 100px;
+  width: 100px;
+}
+
+
+.divElement{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 700px;
+}
