@@ -13,7 +13,7 @@ body{
   overflow: hidden;
 }
 #canvas{
-  cursor: none;
+  cursor: crosshair;
 }
 .chamber-container{
   width: 80px;
@@ -50,4 +50,22 @@ body{
   position: absolute;
   transform: translate(-50%,-50%);
   top: 700px;
+}
+#menu{
+  transform: translate(-50%,-50%);
+  width: 400px;
+  height: 400px;
+  background-color: rgba(96, 43, 191, 0.73);
+  position: absolute;
+  top: -540px;
+  left: -720px;
+  text-align: center;
+  z-index: 10;
+  cursor: crosshair;
+}
+#menu>h1{
+  width: 100%;
+  margin-top: 100px;
+  color: rgb(246, 246, 246);
+  font-size: 60px;
 }

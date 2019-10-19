@@ -23,8 +23,8 @@ function checkCookie() {
 
 //canvas
 var canvas = document.querySelector("#canvas");
-    canvas.width = document.body.clientWidth-300; //document.width is obsolete
-    canvas.height = document.body.clientHeight; //document.height is obsolete
+    canvas.width = 1440; //document.width is obsolete
+    canvas.height = 1080; //document.height is obsolete
 
 var currentXPos = 0;
 var currentYPos = 0;
@@ -114,7 +114,7 @@ var maxScore = 10;
 
 
 //variables for health
-var currentHealth = 10;
+var currentHealth = 4;
 var minHealth = 0;
 
 
@@ -238,8 +238,6 @@ function testHealth() {
     if (currentScore > highscore) {
       setCookie(currentScore);
     }
-    currentHealth = 10;
-    currentScore = 0;
     status = "kill";
   }
 }
@@ -260,6 +258,7 @@ function updateEntity(something) {
 
 
 var status = "alive";
+update();
 function update() {
   if (status == "alive") {
     ctx.clearRect(0,0,WIDTH,HEIGHT);
@@ -277,5 +276,33 @@ function update() {
     consoleDisplay.innerHTML = "Score: " +currentScore +"<br>Health: " +currentHealth +"<br>Highscore: " +highscore;
     requestAnimationFrame(update);
   }
+  else {
+    var menu = document.querySelector("#menu");
+    var menuSCore = document.querySelector("#menu--score");
+    var menuHighscore = document.querySelector("#menu--highscore");
+    menu.style.cssText = "  top: 540px;left: 720px;";
+    menuSCore.innerHTML = "Your Score: " +currentScore;
+    menuHighscore.innerHTML = "<br>Your Highscore: " +highscore;
+  }
 }
-update();
+
+function restartVariables() {
+  reloadTime = 700;
+  wavePause = 2000;
+  enemyGenTime = 1000;
+  ammoCount = 0;
+  currentScore = -1;
+  maxScore = 10;
+  currentHealth = 4;
+  enemyList = {};
+  bulletList = {};
+  enemy_spdY = 4;
+}
+function restartGame() {
+  status = "alive";
+  var menu = document.querySelector("#menu");
+  menu.style.cssText = "  top: -540px;left: -720px;";
+  chamber.innerHTML = '';
+  restartVariables();
+  update();
+}
