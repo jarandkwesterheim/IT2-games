@@ -116,8 +116,8 @@
 
       //canvas
       var canvas = document.querySelector("#canvas");
-          canvas.width = 1440; //document.width is obsolete
-          canvas.height = 1080; //document.height is obsolete
+      WIDTH = window.innerWidth || document.body.clientWidth;
+      HEIGHT = window.innerHeight || document.body.clientHeight;
 
       var currentXPos = 0;
       var currentYPos = 0;
@@ -157,8 +157,8 @@
 
       //variables
       var ctx = canvas.getContext("2d");
-      WIDTH = canvas.width;
-      HEIGHT = canvas.height;
+      canvas.width = WIDTH;
+      canvas.height = HEIGHT;
       var consoleDisplay = document.querySelector("#display");
 
 
@@ -177,7 +177,7 @@
       // bullet_x = currentXPos   needs to be a part of the update()
       var bullet_y = 700;
       var bullet_spdX = 0;
-      var bullet_spdY = -10;
+      var bullet_spdY = -(HEIGHT/140);
       var bullet_width = 7;
       var bullet_height = 20;
       var bullet_color = "yellow";
@@ -193,7 +193,7 @@
       //var enemy_x = Math.random()*1050+45;    needs to be a part of update()
       var enemy_y = -100;
       var enemy_spdX = 0;
-      var enemy_spdY = 4;
+      var enemy_spdY = (HEIGHT/350);
       var enemy_width = 40;
       var enemy_height = 40;
       var enemy_color = "red";
@@ -202,7 +202,7 @@
 
 
       //variables for score
-      var currentScore = -1;
+      var currentScore = 0;
       var maxScore = 10;
 
 
@@ -384,7 +384,7 @@
         wavePause = 2000;
         enemyGenTime = 1000;
         ammoCount = 0;
-        currentScore = -1;
+        currentScore = 0;
         maxScore = 10;
         currentHealth = 4;
         enemyList = {};
