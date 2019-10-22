@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -50,8 +51,6 @@
         height: 100px;
         width: 100px;
       }
-
-
       .divElement{
         position: absolute;
         transform: translate(-50%,-50%);
@@ -113,16 +112,13 @@
       function checkCookie() {
         highscore = getCookie("highscore");
       }
-
       //canvas
       var canvas = document.querySelector("#canvas");
       WIDTH = window.innerWidth || document.body.clientWidth;
       HEIGHT = window.innerHeight || document.body.clientHeight;
-
       var currentXPos = 0;
       var currentYPos = 0;
       var keyPress = 0;
-
       //moving spaceship cover
       document.body.onmousemove = function(evt) {
         var divElement = document.querySelector(".divElement");
@@ -130,7 +126,6 @@
         if (mousePosX > 1058) {
           mousePosX = 1058;
         }
-
         divElement.style.cssText = 'left: ' +mousePosX +'px';
         return currentXPos = mousePosX,currentYPos = evt.clientY;
       }
@@ -143,7 +138,9 @@
           checkSpacebar(keyPress);
         }
       }
-
+      document.body.onmousedown = function() {
+        fireBullet();
+      }
       //variables for background image      1:arcade    2:neonrider
       var background = 1;
       var backgroundList = {
@@ -152,27 +149,18 @@
         3:'https://media3.giphy.com/media/sCIA4mXdrMc6c/source.gif',
       }
       document.body.style = 'background-image: url("' +backgroundList[background]; +'");';
-
-
-
       //variables
       var ctx = canvas.getContext("2d");
       canvas.width = WIDTH;
       canvas.height = HEIGHT;
       var consoleDisplay = document.querySelector("#display");
-
-
       //variables for player position and id
       var player_y = 800;
       var player_id = "player";
-
-
       //variables for TIMING
       var reloadTime = 700;
       var wavePause = 2000;
       var enemyGenTime = 1000;
-
-
       //variables for bullet and bulletanimations
       // bullet_x = currentXPos   needs to be a part of the update()
       var bullet_y = 700;
@@ -181,14 +169,10 @@
       var bullet_width = 7;
       var bullet_height = 20;
       var bullet_color = "yellow";
-
       var bulletCount = 0;
       var ammoCount = 0;
       var bulletOffSet = 0;
       var chamber = document.querySelector("#chamber");
-
-
-
       //variables for enemy and enemy animations
       //var enemy_x = Math.random()*1050+45;    needs to be a part of update()
       var enemy_y = -100;
@@ -197,20 +181,13 @@
       var enemy_width = 40;
       var enemy_height = 40;
       var enemy_color = "red";
-
       var enemyCount = 0;
-
-
       //variables for score
       var currentScore = 0;
       var maxScore = 10;
-
-
       //variables for health
       var currentHealth = 4;
       var minHealth = 0;
-
-
       var player = {
         x:currentXPos,
         y:player_y,
@@ -219,12 +196,9 @@
         name:player,
         id:player_id
       }
-
       //functions to generate, call, time, reload and fire bullets
       var bulletList = {};
       Bullet("B1",-40,-40,0,0,40,40,"yellow");
-
-
       var reloadTimer = setInterval(addAmmo,reloadTime);
       function addAmmo() {
         if (ammoCount < 6) {
@@ -257,8 +231,6 @@
       function addPSpeed(keyPress) {
         //ad keyfunciton to move player
       }
-
-
       function Bullet(id,x,y,spdX,spdY,widht,height,color) {
         var bullet = {
           x:x,
@@ -272,19 +244,14 @@
         }
         bulletList[id] = bullet;
       }
-
-
       //functions to generate, sort, call and space enemies
       var enemyList = {};
       Enemy("B1",-40,-40,0,0,40,40,"red");
-
-
       var wavePauseInterval = setInterval(generateWave,wavePause);
       function generateWave() {
         clearInterval(wavePauseInterval);
         var generateEnemyInterval = setInterval(generateEnemy,enemyGenTime);
       }
-
       function generateEnemy() {
         if (currentScore < maxScore) {
           enemyCount++;
@@ -296,7 +263,6 @@
           enemy_spdY= enemy_spdY*1.3;
         }
       }
-
       function Enemy(id,x,y,spdX,spdY,width,height,color){
         var enemy = {
           x:x,
@@ -310,9 +276,6 @@
         }
         enemyList[id] = enemy;
       }
-
-
-
       //test collision
       testCollisionX = function(bullet,enemy) {
         if (bullet.x + bullet.width >= enemy.x && bullet.x <= enemy.x+enemy.width && bullet.y < enemy.y+enemy.height) {
@@ -323,8 +286,6 @@
           enemy.x = -500;
         }
       }
-
-
       //test Health
       function testHealth() {
         if (currentHealth <= minHealth) {
@@ -334,7 +295,6 @@
           status = "kill";
         }
       }
-
       function updateEntity(something) {
         something.x += something.spdX;
         something.y += something.spdY;
@@ -348,8 +308,6 @@
           testHealth();
         }
       }
-
-
       var status = "alive";
       update();
       function update() {
@@ -378,7 +336,6 @@
           menuHighscore.innerHTML = "<br>Your Highscore: " +highscore;
         }
       }
-
       function restartVariables() {
         reloadTime = 700;
         wavePause = 2000;
