@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      #canvas {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body onkeydown="regKey(event)" onkeyup="resKey()">
+
+    <canvas id="canvas" width="1000" height=500"></canvas>
+
+    <script type="text/javascript">
+      var canvas = document.querySelector("#canvas");
+      var ctx = canvas.getContext("2d");
+      var HEIGHT = canvas.height;
+      var WIDTH = canvas.width;
+      var bHEIGHT = 40;
+      var bWIDTH = 40;
+      var xPos = 500;
+      var yPos = 200;
+      var spdX = 0;
+      var spdY = 0;
+      var key = 0;
+      var gravity = 0.3;
+      var gravityspeed = 0;
+
+
+
+      function draw(){
+        ctx.clearRect(0,0,WIDTH,HEIGHT);
+        ctx.fillStyle = "red";
+        ctx.fillRect(xPos,yPos,bHEIGHT,bWIDTH);
+      }
+
+      function resKey() {
+        key = 0;
+      }
+      function regKey(event) {
+        key = event.keyCode;
+        return;
+      }
+
+      function update() {
+        if(key==32){
+          spdY = 30;
+          return;
+        }
+        gravityspeed += gravity;
+        xPos += spdX;
+        yPos += spdY+gravityspeed;
+        draw();
+
+        spdY = 0;
+
+        requestAnimationFrame(update);
+      }
+      draw();
+      update();
+
+    </script>
+
+  </body>
+</html>
