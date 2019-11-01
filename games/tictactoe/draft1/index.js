@@ -126,7 +126,7 @@ function clearPlayercount(){
 function prepTile(tile) {
   //check if tile is painted
   if (tileArr[tile] == "") {
-    fblobby1.child(tile).set(playerid);
+    return true;
   }
 }
 function updateTiles() {
@@ -231,8 +231,10 @@ function gameClick(x,y) {
   var tile = (row*3)+column;
   if (turn == playerid) {
     getValueTile();
-    prepTile(tile);
-    drawTiles(column,row,symbolid);
+    if (prepTile(tile) == true) {
+      fblobby1.child(tile).set(playerid);
+      drawTiles(column,row,symbolid);
+    }
   }
   var newplayerid = 1;
   if (playerid == 1) {
