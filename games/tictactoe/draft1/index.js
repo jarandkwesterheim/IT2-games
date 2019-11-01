@@ -128,6 +128,9 @@ function prepTile(tile) {
   if (tileArr[tile] == "") {
     return true;
   }
+  else {
+    return false;
+  }
 }
 function updateTiles() {
   console.log("updateTiles");
@@ -232,6 +235,7 @@ function gameClick(x,y) {
   if (turn == playerid) {
     getValueTile();
     if (prepTile(tile) == true) {
+      console.log(prepTile(tile));
       fblobby1.child(tile).set(playerid);
       drawTiles(column,row,symbolid);
     }
