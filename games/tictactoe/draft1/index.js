@@ -289,9 +289,9 @@ function drawSquaresTrd() {
 function resetFirebase(lobbyid) {
   for (var i = 0; i < 10; i++) {
     db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child(i).set("");
-    db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('players').set(0);
-    db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('turn').set(1);
   }
+  db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('players').set(0);
+  db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('turn').set(1);
 }
 
 //setup menu
