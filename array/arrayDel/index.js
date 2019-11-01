@@ -3,7 +3,7 @@ var btn = document.querySelector("#btn");
 var target = document.querySelector("#info");
 
 var nameArr = [
-  "Hi nuub",
+  "Jarand","Martin","Aleksander","Josh","Mikko","Maren","Emma","Julie"
 ];
 
 function readyTarget() {
@@ -29,11 +29,3 @@ btn.onclick = function() {
   var index = nameArr.indexOf(crntInp);
   deleteArr(index);
 }
-
-function addArr() {
-  nameArr.push("Peter Griffin");
-  printNames();
-
-  requestAnimationFrame(addArr);
-}
-addArr();
