@@ -98,7 +98,6 @@ var tileArr = [
   "",
   "",
   "",
-  "",
 ];
 var tileNum = 0;
 
@@ -155,7 +154,7 @@ function drawTiles(x,y,symbolid) {
 }
 function getValueTile() {
   fblobby1.child('turn').on('value', snap => {
-    for (var i = 1; i <= 9; i++) {
+    for (var i = 1; i < 9; i++) {
       fblobby1.child(i).on('value', snap => {
         update(snap.val());
       })
