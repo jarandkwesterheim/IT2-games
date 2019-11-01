@@ -127,11 +127,6 @@ function prepTile(tile) {
   //check if tile is painted
   if (tileArr[tile] == "") {
     fblobby1.child(tile).set(playerid);
-    var newplayerid = 1;
-    if (playerid == 1) {
-      newplayerid = 2;
-    }
-    turn1.set(newplayerid);
   }
 }
 function updateTiles() {
@@ -234,9 +229,16 @@ function gameClick(x,y) {
   var symbolid = playerid;
   //calculate tile
   var tile = (row*3)+column;
-  getValueTile();
-  prepTile(tile);
-  drawTiles(column,row,symbolid);
+  if (turn == playerid) {
+    getValueTile();
+    prepTile(tile);
+    drawTiles(column,row,symbolid);
+  }
+  var newplayerid = 1;
+  if (playerid == 1) {
+    newplayerid = 2;
+  }
+  turn1.set(newplayerid);
 }
 
 //setup squares
@@ -287,6 +289,8 @@ function drawSquaresTrd() {
 function resetFirebase(lobbyid) {
   for (var i = 0; i < 10; i++) {
     db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child(i).set("");
+    db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('players').set(0);
+    db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('turn').set(1);
   }
 }
 
