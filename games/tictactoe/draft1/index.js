@@ -33,8 +33,9 @@ var turn = 0;
 
 
 turn1.on('value', snap => {
+  console.log("turn changed");
   turn = snap.val();
-  updateTiles();
+  update(snap);
 })
 
 players1.on('value', snap => {
@@ -42,7 +43,6 @@ players1.on('value', snap => {
   if (players1Count !== 2) {
     clearCanvas();
     drawMenu(snap.val());
-    resetFirebase();
   }
 });
 
@@ -125,6 +125,12 @@ function clearPlayercount(){
 function prepTile(tile) {
   //check if tile is painted
   if (tileArr[tile] == "") {
+    if (playerid == 1) {
+      turn1.set(2);
+    }
+    else if (playerid == 2) {
+      turn1.set(1);
+    }
     return true;
   }
   else {
@@ -132,11 +138,15 @@ function prepTile(tile) {
   }
 }
 function updateTiles() {
-  console.log("updateTiles");
+  for (var i = 0; i < 9; i++) {
+    var id = tileArr[i];
+    var x = i%3+1;
+    var y = Math.floor(i/3);
+    drawTiles(x,y,id);
+  }
 }
 
 function drawTiles(x,y,symbolid) {
-  console.log(x,y);
   if (symbolid == 1) {
     ctx.fillStyle = "black";
     ctx.moveTo((x*trd)-(0.1*trd), (y*trd)+(0.1*trd));
@@ -162,8 +172,9 @@ function getValueTile() {
   })
 }
 function update(snap) {
+  tileArr[tileNum-1] = snap;
   tileNum++;
-  tileArr[tileNum] = snap;
+  updateTiles();
 }
 
 
@@ -179,7 +190,7 @@ canvas.onclick = function(evt) {
       menuClick(mousePosY);
     }
   }
-  else if (status == game && turn == playerid) {
+  else if (status == game) {
     gameClick(mousePosX,mousePosY);
   }
 }
@@ -239,11 +250,6 @@ function gameClick(x,y) {
       drawTiles(column,row,symbolid);
     }
   }
-  var newplayerid = 1;
-  if (playerid == 1) {
-    newplayerid = 2;
-  }
-  turn1.set(newplayerid);
 }
 
 //setup squares
@@ -292,6 +298,7 @@ function drawSquaresTrd() {
 
 //reset firebase
 function resetFirebase(lobbyid) {
+  clearCanvas();
   for (var i = 0; i < 10; i++) {
     db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child(i).set("");
   }
@@ -323,16 +330,12 @@ function drawGame1() {
   drawTiles();
 }
 function setupLogistics() {
-  if (players1Count == 1) {
-    playerid = 1;
-    playersymbol = "cross";
-  }
-  else if (players1Count == 2) {
-    playerid = 2;
-    playersymbol == "circle";
-  }
+  playerid = players1Count;
+  console.log(playerid);
 }
 
 
 //-----------------
 //run by default
+drawMenu(2);
+resetFirebase(1);
