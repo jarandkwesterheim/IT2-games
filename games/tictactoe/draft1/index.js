@@ -62,6 +62,8 @@ else {
 var idle = "idle";
 var menu = "menu";
 var game = "game";
+var waiting = "waiting";
+var endscreen = "endscreen";
 var status = idle;
 
 var gamelobby = "";
@@ -92,9 +94,12 @@ turn1.on('value', snap => {
 
 players1.on('value', snap => {
   players1Count = snap.val();
-  if (players1Count !== 2) {
+  if (status == "menu") {
     clearCanvas();
     drawMenu(snap.val());
+  }
+  else if (status == "waiting") {
+    drawGame1();
   }
 });
 
@@ -180,20 +185,23 @@ function updateTiles() {
 }
 
 function drawTiles(x,y,symbolid1) {
-  console.log("drawing tiles, values = "+ x +", "+ y +", "+ symbolid1);
-  if (symbolid1 == 1) {
-    ctx.fillStyle = "black";
-    ctx.moveTo((x*trd)-(0.1*trd), (y*trd)+(0.1*trd));
-    ctx.lineTo((x*trd)-(0.9*trd), (y*trd)+(0.9*trd));
-    ctx.moveTo((x*trd)-(0.9*trd), (y*trd)+(0.1*trd));
-    ctx.lineTo((x*trd)-(0.1*trd), (y*trd)+(0.9*trd));
-    ctx.stroke();
-  }
-  else if (symbolid1 == 2) {
-    ctx.fillStyle = "black";
-    ctx.moveTo((x*trd)-(0.5*trd)+(0.4*trd), (y*trd)+(0.5*trd));
-    ctx.arc((x*trd)-(0.5*trd),(y*trd)+(0.5*trd),0.4*trd,0,2*Math.PI);
-    ctx.stroke();
+  if (status == "game") {
+    console.log("drawing tiles, values = "+ x +", "+ y +", "+ symbolid1);
+    if (symbolid1 == 1) {
+      ctx.fillStyle = "black";
+      ctx.moveTo((x*trd)-(0.1*trd), (y*trd)+(0.1*trd));
+      ctx.lineTo((x*trd)-(0.9*trd), (y*trd)+(0.9*trd));
+      ctx.moveTo((x*trd)-(0.9*trd), (y*trd)+(0.1*trd));
+      ctx.lineTo((x*trd)-(0.1*trd), (y*trd)+(0.9*trd));
+      ctx.stroke();
+    }
+    else if (symbolid1 == 2) {
+      ctx.fillStyle = "black";
+      ctx.moveTo((x*trd)-(0.5*trd)+(0.4*trd), (y*trd)+(0.5*trd));
+      ctx.arc((x*trd)-(0.5*trd),(y*trd)+(0.5*trd),0.4*trd,0,2*Math.PI);
+      ctx.stroke();
+    }
+    checkRules();
   }
 }
 function update(snap,valueArr) {
@@ -203,6 +211,7 @@ function update(snap,valueArr) {
   var x = valueArr%3+1;
   var y = Math.floor(valueArr/3);
   drawTiles(x,y,id);
+  checkRules();
 }
 
 
@@ -221,6 +230,9 @@ canvas.onclick = function(evt) {
   else if (status == game) {
     gameClick(mousePosX,mousePosY);
   }
+  else if (status == "endscreen") {
+    window.history.go(0);
+  }
 }
 
 function menuClick(y) {
@@ -230,7 +242,14 @@ function menuClick(y) {
       players1.set(i+1);
       resetTimeout();
       gamelobby = 1;
-      drawGame1();
+      if (players1Count == 1) {
+        status = "waiting";
+        checkRules();
+      }
+      else if (players1Count == 2) {
+        playerid = players1Count;
+        drawGame1();
+      }
     }
   }
   else if (y > (5*tnth) && y < (7*tnth)) {
@@ -344,6 +363,7 @@ function drawMenu(num1,num2,num3) {
   ctx.fillText("Lobby 1  "+num1+"/2", (3*tnth),(4*tnth));
   ctx.fillText("Lobby 2  "+num2+"/2", (3*tnth),(6*tnth));
   ctx.fillText("Lobby 3  "+num3+"/2", (3*tnth),(8*tnth));
+  tileArr = [0,0,0,0,0,0,0,0,0];
 }
 
 
@@ -355,16 +375,118 @@ function drawGame1() {
 
   drawSquaresTrd();
   setupLogistics();
-  drawTiles();
 }
 function setupLogistics() {
-  playerid = players1Count;
   console.log(playerid);
 }
 
 
+
+//------------
+//RULES
+function checkRules() {
+  if (status == "game") {
+    rulesGame();
+  }
+  else if (status == "endscreen") {
+    setTimeout(drawEndScreen,1000);
+  }
+  else if (status == "waiting" && players1Count == 1) {
+    playerid = 1;
+    clearCanvas();
+    ctx.font = fontsizeSmall+"px Arial";
+    ctx.fillText(" WAITING FOR PLAYER 2", (1*tnth), (4*tnth));
+  }
+}
+
+function rulesGame() {
+  //chechking if player 1 won
+  if (tileArr[0] == 1 && tileArr[1] == 1 && tileArr[2] == 1){ //first row
+    status = endscreen;
+    return tileArr[0];
+  }
+  else if (tileArr[3] == 1 && tileArr[4] == 1 && tileArr[5] == 1){ //second row
+    status = endscreen;
+    return tileArr[3];
+  }
+  else if (tileArr[6] == 1 && tileArr[7] == 1 && tileArr[8] == 1){ //third row
+    status = endscreen;
+    return tileArr[6];
+  }
+  else if (tileArr[0] == 1 && tileArr[3] == 1 && tileArr[6] == 1){ //first column
+    status = endscreen;
+    return tileArr[0];
+  }
+  else if (tileArr[1] == 1 && tileArr[4] == 1 && tileArr[7] == 1){ //second column
+    status = endscreen;
+    return tileArr[1];
+  }
+  else if (tileArr[2] == 1 && tileArr[5] == 1 && tileArr[8] == 1){ //third column
+    status = endscreen;
+    return tileArr[2];
+  }
+  else if (tileArr[0] == 1 && tileArr[4] == 1 && tileArr[8] == 1){ //first cross
+    status = endscreen;
+    return tileArr[0];
+  }
+  else if (tileArr[2] == 1 && tileArr[4] == 1 && tileArr[6] == 1){ //second cross
+    status = endscreen;
+    return tileArr[2];
+  }
+  //checking if player 2 won
+  else if (tileArr[0] == 2 && tileArr[1] == 2 && tileArr[2] == 2){ //first row
+    status = endscreen;
+    return tileArr[0];
+  }
+  else if (tileArr[3] == 2 && tileArr[4] == 2 && tileArr[5] == 2){ //second row
+    status = endscreen;
+    return tileArr[3];
+  }
+  else if (tileArr[6] == 2 && tileArr[7] == 2 && tileArr[8] == 2){ //third row
+    status = endscreen;
+    return tileArr[6];
+  }
+  else if (tileArr[0] == 2 && tileArr[3] == 2 && tileArr[6] == 2){ // first column
+    status = endscreen;
+    return tileArr[0];
+  }
+  else if (tileArr[1] == 2 && tileArr[4] == 2 && tileArr[7] == 2){ //second column
+    status = endscreen;
+    return tileArr[1];
+  }
+  else if (tileArr[2] == 2 && tileArr[5] == 2 && tileArr[8] == 2){ //third column
+    status = endscreen;
+    return tileArr[2];
+  }
+  else if (tileArr[0] == 2 && tileArr[4] == 2 && tileArr[8] == 2){ //first cross
+    status = endscreen;
+    return tileArr[0];
+  }
+  else if (tileArr[2] == 2 && tileArr[4] == 2 && tileArr[6] == 2){ //second cross
+    status = endscreen;
+    return tileArr[2];
+  }
+}
+function drawEndScreen() {
+  clearCanvas();
+  var w = rulesGame();
+  ctx.font = fontsizeBig+"px Arial";
+  if (w == playerid) {
+    ctx.fillText('YOU WON', (2*tnth),(2*tnth));
+  }
+  else if (w !== playerid) {
+    ctx.fillText('YOU LOST', (2*tnth),(2*tnth));
+  }
+  ctx.font = fontsizeSmall+"px Arial";
+  ctx.fillText('WINNER IS "player '+w+'"', (2*tnth),(4*tnth));
+  ctx.fillText('click to restart', (3*tnth),(6*tnth));
+}
+
+
+
 //-----------------
 //run by default
+// var ruletimer = setInterval(checkRules,1000);
 
 drawMenu(2);
 resetFirebase(1);
