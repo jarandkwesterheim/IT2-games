@@ -32,23 +32,6 @@ var turn = 0;
 
 
 
-turn1.on('value', snap => {
-  console.log("turn changed");
-  turn = snap.val();
-  update(snap);
-})
-
-players1.on('value', snap => {
-  players1Count = snap.val();
-  if (players1Count !== 2) {
-    clearCanvas();
-    drawMenu(snap.val());
-  }
-});
-
-
-
-
 //window sizing
 var HEIGHT = window.innerHeight;
 var WIDTH = window.innerWidth;
@@ -88,17 +71,7 @@ var playerid = "";
 var playersymbol = "";
 
 //tile array
-var tileArr = [
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-];
+var tileArr = [0,0,0,0,0,0,0,0,0];
 var tileNum = 0;
 
 //canvas sizing
@@ -107,6 +80,63 @@ var trd = ((HEIGHT*0.8)/3);
 var fontsizeBig = ((HEIGHT*0.8)/8);
 var fontsizeSmall = ((HEIGHT*0.8)/15);
 
+
+//-----------------
+//UPDATE ARR
+//-----------------
+
+turn1.on('value', snap => {
+  console.log("turn changed");
+  turn = snap.val();
+});
+
+players1.on('value', snap => {
+  players1Count = snap.val();
+  if (players1Count !== 2) {
+    clearCanvas();
+    drawMenu(snap.val());
+  }
+});
+
+
+
+
+fblobby1.child(1).on('value', snap => {
+  update(snap.val(),1);
+  console.log("1 has been updated");
+})
+fblobby1.child(2).on('value', snap => {
+  update(snap.val(),2);
+  console.log("2 has been updated");
+})
+fblobby1.child(3).on('value', snap => {
+  update(snap.val(),3);
+  console.log("3 has been updated");
+})
+fblobby1.child(4).on('value', snap => {
+  update(snap.val(),4);
+  console.log("4 has been updated");
+})
+fblobby1.child(5).on('value', snap => {
+  update(snap.val(),5);
+  console.log("5 has been updated");
+})
+fblobby1.child(6).on('value', snap => {
+  update(snap.val(),6);
+  console.log("6 has been updated");
+})
+fblobby1.child(7).on('value', snap => {
+  update(snap.val(),7);
+  console.log("7 has been updated");
+})
+fblobby1.child(8).on('value', snap => {
+  update(snap.val(),8);
+  console.log("8 has been updated");
+})
+fblobby1.child(0).on('value', snap => {
+  update(snap.val(),0);
+  console.log("0 has been updated");
+})
 
 //-----------------
 //GENERAL FUNCTIONS
@@ -123,6 +153,7 @@ function clearPlayercount(){
   players1.set(0);
 }
 function prepTile(tile) {
+  console.log("prepping tile "+tile+" which has value "+tileArr[tile]);
   //check if tile is painted
   if (tileArr[tile] == "") {
     if (playerid == 1) {
@@ -131,23 +162,26 @@ function prepTile(tile) {
     else if (playerid == 2) {
       turn1.set(1);
     }
+    console.log("true");
     return true;
   }
   else {
+    console.log("false");
     return false;
   }
 }
 function updateTiles() {
   for (var i = 0; i < 9; i++) {
-    var id = tileArr[i];
+    var id = tileArr[i] ;
     var x = i%3+1;
     var y = Math.floor(i/3);
     drawTiles(x,y,id);
   }
 }
 
-function drawTiles(x,y,symbolid) {
-  if (symbolid == 1) {
+function drawTiles(x,y,symbolid1) {
+  console.log("drawing tiles, values = "+ x +", "+ y +", "+ symbolid1);
+  if (symbolid1 == 1) {
     ctx.fillStyle = "black";
     ctx.moveTo((x*trd)-(0.1*trd), (y*trd)+(0.1*trd));
     ctx.lineTo((x*trd)-(0.9*trd), (y*trd)+(0.9*trd));
@@ -155,26 +189,20 @@ function drawTiles(x,y,symbolid) {
     ctx.lineTo((x*trd)-(0.1*trd), (y*trd)+(0.9*trd));
     ctx.stroke();
   }
-  else if (symbolid == 2) {
+  else if (symbolid1 == 2) {
     ctx.fillStyle = "black";
     ctx.moveTo((x*trd)-(0.5*trd)+(0.4*trd), (y*trd)+(0.5*trd));
     ctx.arc((x*trd)-(0.5*trd),(y*trd)+(0.5*trd),0.4*trd,0,2*Math.PI);
     ctx.stroke();
   }
 }
-function getValueTile() {
-  fblobby1.child('turn').on('value', snap => {
-    for (var i = 1; i < 9; i++) {
-      fblobby1.child(i).on('value', snap => {
-        update(snap.val());
-      })
-    }
-  })
-}
-function update(snap) {
-  tileArr[tileNum-1] = snap;
-  tileNum++;
-  updateTiles();
+function update(snap,valueArr) {
+  tileArr[valueArr] = snap;
+  console.log("snap = "+snap);
+  var id = tileArr[valueArr] ;
+  var x = valueArr%3+1;
+  var y = Math.floor(valueArr/3);
+  drawTiles(x,y,id);
 }
 
 
@@ -240,14 +268,14 @@ function gameClick(x,y) {
 
 
   var symbolid = playerid;
+  console.log("symbol id is "+symbolid)
   //calculate tile
-  var tile = (row*3)+column;
+  var tile = (row*3)+column-1;
+  console.log("tile is "+tile);
   if (turn == playerid) {
-    getValueTile();
     if (prepTile(tile) == true) {
-      console.log(prepTile(tile));
+      console.log("setting tile in database");
       fblobby1.child(tile).set(playerid);
-      drawTiles(column,row,symbolid);
     }
   }
 }
@@ -299,8 +327,8 @@ function drawSquaresTrd() {
 //reset firebase
 function resetFirebase(lobbyid) {
   clearCanvas();
-  for (var i = 0; i < 10; i++) {
-    db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child(i).set("");
+  for (var i = 0; i < 9; i++) {
+    db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child(i).set(0);
   }
   db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('players').set(0);
   db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child('turn').set(1);
@@ -337,5 +365,6 @@ function setupLogistics() {
 
 //-----------------
 //run by default
+
 drawMenu(2);
 resetFirebase(1);
