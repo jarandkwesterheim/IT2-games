@@ -354,15 +354,13 @@ function resetFirebase(lobbyid) {
 }
 
 //setup menu
-function drawMenu(num1,num2,num3) {
+function drawMenu(num1) {
   status = menu;
   ctx.font = fontsizeBig+"px Arial";
   ctx.fillText("MENU", (3*tnth),(2*tnth));
 
   ctx.font = fontsizeSmall+"px Arial";
   ctx.fillText("Lobby 1  "+num1+"/2", (3*tnth),(4*tnth));
-  ctx.fillText("Lobby 2  "+num2+"/2", (3*tnth),(6*tnth));
-  ctx.fillText("Lobby 3  "+num3+"/2", (3*tnth),(8*tnth));
   tileArr = [0,0,0,0,0,0,0,0,0];
 }
 
@@ -466,20 +464,34 @@ function rulesGame() {
     status = endscreen;
     return tileArr[2];
   }
+  else {
+    if (tileArr[0] !== 0 && tileArr[1] !== 0 && tileArr[2] !== 0 && tileArr[3] !== 0 && tileArr[4] !== 0 && tileArr[5] !== 0 && tileArr[6] !== 0 && tileArr[7] !== 0 && tileArr[8] !== 0) {
+      status = endscreen;
+      return 0;
+    }
+  }
 }
 function drawEndScreen() {
   clearCanvas();
   var w = rulesGame();
   ctx.font = fontsizeBig+"px Arial";
-  if (w == playerid) {
-    ctx.fillText('YOU WON', (2*tnth),(2*tnth));
+  if (w == 0) {
+    ctx.font = fontsizeBig+"px Arial";
+    ctx.fillText("DRAW", (3*tnth),(2*tnth));
+    ctx.font = fontsizeSmall+"px Arial";
+    ctx.fillText('click to restart', (3*tnth),(6*tnth));
   }
-  else if (w !== playerid) {
-    ctx.fillText('YOU LOST', (2*tnth),(2*tnth));
+  else {
+    if (w == playerid) {
+      ctx.fillText('YOU WON', (2*tnth),(2*tnth));
+    }
+    else if (w !== playerid) {
+      ctx.fillText('YOU LOST', (2*tnth),(2*tnth));
+    }
+    ctx.font = fontsizeSmall+"px Arial";
+    ctx.fillText('WINNER IS "player '+w+'"', (2*tnth),(4*tnth));
+    ctx.fillText('click to restart', (3*tnth),(6*tnth));
   }
-  ctx.font = fontsizeSmall+"px Arial";
-  ctx.fillText('WINNER IS "player '+w+'"', (2*tnth),(4*tnth));
-  ctx.fillText('click to restart', (3*tnth),(6*tnth));
 }
 
 
