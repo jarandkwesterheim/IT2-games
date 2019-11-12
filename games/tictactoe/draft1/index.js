@@ -88,7 +88,6 @@ var fontsizeSmall = ((HEIGHT*0.8)/15);
 //-----------------
 
 turn1.on('value', snap => {
-  console.log("turn changed");
   turn = snap.val();
 });
 
@@ -108,39 +107,30 @@ players1.on('value', snap => {
 
 fblobby1.child(1).on('value', snap => {
   update(snap.val(),1);
-  console.log("1 has been updated");
 })
 fblobby1.child(2).on('value', snap => {
   update(snap.val(),2);
-  console.log("2 has been updated");
 })
 fblobby1.child(3).on('value', snap => {
   update(snap.val(),3);
-  console.log("3 has been updated");
 })
 fblobby1.child(4).on('value', snap => {
   update(snap.val(),4);
-  console.log("4 has been updated");
 })
 fblobby1.child(5).on('value', snap => {
   update(snap.val(),5);
-  console.log("5 has been updated");
 })
 fblobby1.child(6).on('value', snap => {
   update(snap.val(),6);
-  console.log("6 has been updated");
 })
 fblobby1.child(7).on('value', snap => {
   update(snap.val(),7);
-  console.log("7 has been updated");
 })
 fblobby1.child(8).on('value', snap => {
   update(snap.val(),8);
-  console.log("8 has been updated");
 })
 fblobby1.child(0).on('value', snap => {
   update(snap.val(),0);
-  console.log("0 has been updated");
 })
 
 //-----------------
@@ -158,7 +148,6 @@ function clearPlayercount(){
   players1.set(0);
 }
 function prepTile(tile) {
-  console.log("prepping tile "+tile+" which has value "+tileArr[tile]);
   //check if tile is painted
   if (tileArr[tile] == "") {
     if (playerid == 1) {
@@ -167,11 +156,9 @@ function prepTile(tile) {
     else if (playerid == 2) {
       turn1.set(1);
     }
-    console.log("true");
     return true;
   }
   else {
-    console.log("false");
     return false;
   }
 }
@@ -186,7 +173,6 @@ function updateTiles() {
 
 function drawTiles(x,y,symbolid1) {
   if (status == "game") {
-    console.log("drawing tiles, values = "+ x +", "+ y +", "+ symbolid1);
     if (symbolid1 == 1) {
       ctx.fillStyle = "black";
       ctx.moveTo((x*trd)-(0.1*trd), (y*trd)+(0.1*trd));
@@ -206,7 +192,6 @@ function drawTiles(x,y,symbolid1) {
 }
 function update(snap,valueArr) {
   tileArr[valueArr] = snap;
-  console.log("snap = "+snap);
   var id = tileArr[valueArr] ;
   var x = valueArr%3+1;
   var y = Math.floor(valueArr/3);
@@ -232,6 +217,7 @@ canvas.onclick = function(evt) {
   }
   else if (status == "endscreen") {
     window.history.go(0);
+    console.log("reloading page");
   }
 }
 
@@ -287,13 +273,10 @@ function gameClick(x,y) {
 
 
   var symbolid = playerid;
-  console.log("symbol id is "+symbolid)
   //calculate tile
   var tile = (row*3)+column-1;
-  console.log("tile is "+tile);
   if (turn == playerid) {
     if (prepTile(tile) == true) {
-      console.log("setting tile in database");
       fblobby1.child(tile).set(playerid);
     }
   }
@@ -345,6 +328,7 @@ function drawSquaresTrd() {
 
 //reset firebase
 function resetFirebase(lobbyid) {
+  console.log("reseting firebase");
   clearCanvas();
   for (var i = 0; i < 9; i++) {
     db.child('tictactoe').child('lobbies').child('lobby'+lobbyid).child(i).set(0);
@@ -375,7 +359,6 @@ function drawGame1() {
   setupLogistics();
 }
 function setupLogistics() {
-  console.log(playerid);
 }
 
 

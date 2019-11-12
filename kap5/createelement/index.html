@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+    <div class="ye">
+      <ol id="liste">
+
+      </ol>
+    </div>
+
+
+    <script type="text/javascript">
+      var liste = document.querySelector("#liste");
+
+      var bodyEl = document.querySelector("body");
+      var overskrift = document.createElement("h3");
+      var pElement = document.createElement("p");
+      pElement.innerHTML = "Her er et nytt avsnitt";
+      bodyEl.appendChild(pElement);
+
+      var dyrArr = ["hest", "ku", "sau"];
+      for (var dyr of dyrArr) {
+        var listepunkt = document.createElement("li");
+        listepunkt.innerHTML = dyr;
+        liste.appendChild(listepunkt);
+      }
+    </script>
+  </body>
+</html>
