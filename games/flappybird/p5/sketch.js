@@ -4,18 +4,8 @@ function preload(){
 
 var HEIGHT = 0;
 var WIDTH = 0;
+let playermodel;
 
-function setup() {
-  createCanvas(windowWidth,windowHeight);
-  noStroke();
-  frameRate(60);
-  Obj('O1',1300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-  Obj('O2',1800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-  Obj('O3',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-  WIDTH = windowWidth;
-  HEIGHT = windowHeight;
-  // put setup code here
-}
 
 //variables
 var timer = 0;
@@ -24,35 +14,17 @@ var gameMode = 'normal';
 
 var xPos = 300;
 var yPos = 200;
-var rectWidth = 50;
-var rectHeight = 50;
-var rectFill = 0;
-function genrectFill() {
-  var i = Math.floor(Math.random()*4);
-  if (i == 0) {
-    rectFill = 'rgb(255, 0, 0)';
-  }
-  else if (i == 1) {
-    rectFill = 'rgb(0, 64, 255)';
-  }
-  else if (i == 2) {
-    rectFill = 'rgb(0, 255, 3)';
-  }
-  else{
-    rectFill = 'rgb(255, 252, 0)';
-  }
-}
-genrectFill();
-
+var rectWidth = 51;
+var rectHeight = 39;
 var yAcc = 0;
 
 var status = 'alive';
 var validKey = 32;
 var msg = 'press "SPACE" to fly';
 
-var objList = {};
-function Obj(id,x,y,height) {
-  var object = {
+var obsList = {};
+function obs(id,x,y,height) {
+  var obsect = {
     id:id,
     x:x,
     y:y,
@@ -60,13 +32,13 @@ function Obj(id,x,y,height) {
     height:height,
     status:'active'
   }
-  objList[id] = object;
+  obsList[id] = obsect;
 };
-var objSpd = 6;
-var objDistance = 500;
-var objStarPosX = 2300;
-var objCount = 3;
-var objXposExtra = 0;
+var obsSpd = 6;
+var obsDistance = 500;
+var obsStarPosX = 2300;
+var obsCount = 3;
+var obsXposExtra = 0;
 
 
 var points = 0;
@@ -86,6 +58,18 @@ var backgroundClr = 'rbg(100, 211, 222)';
 var cloudClr = 'rgb(233, 233, 233)';
 
 
+function setup() {
+  createCanvas(windowWidth,windowHeight);
+  noStroke();
+  frameRate(60);
+  obs('O1',1300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O2',1800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O3',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  WIDTH = windowWidth;
+  HEIGHT = windowHeight;
+  playermodel = loadImage('../playermodel.png')//loads playermodel
+  // put setup code here
+}
 
 
 
@@ -98,13 +82,13 @@ function keyPressed() {
       msg = 'press "SPACE" to fly';
       yPos = 200;
       status = 'alive';
-      objSpd = 6;
-      objCount = 3;
-      objXposExtra = 0;
-      objList = {};
-      Obj('O1',1300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
-      Obj('O2',1800,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
-      Obj('O3',2300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+      obsSpd = 6;
+      obsCount = 3;
+      obsXposExtra = 0;
+      obsList = {};
+      obs('O1',1300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+      obs('O2',1800,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+      obs('O3',2300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
       randomizeCloud(3);
       points = 0;
       pointMeasure = 0;
@@ -122,7 +106,7 @@ function writeMsg() {
     text(msg,windowWidth/2-100,windowHeight/3);
   }
   textSize(50);
-  fill(rectFill);
+  fill('rgb(251, 236, 39)');
   text(points,windowWidth/2-20,windowHeight/7);
 }
 function checkHeight() {
@@ -145,47 +129,47 @@ function checkHeight() {
 }
 
 function checkLength() {
-  for(item in objList){
-    if (objList[item].x < xPos && objList[item].status == 'active') {
+  for(item in obsList){
+    if (obsList[item].x < xPos && obsList[item].status == 'active') {
       points++;
-      objList[item].status = 'inactive';
+      obsList[item].status = 'inactive';
     }
   }
 }
 
-function generateObstacles() {
+function generateobstacles() {
   if (points > pointMeasure) {
     var id = points+3;
-    Obj('O'+id,xPos+3*objDistance,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+    obs('O'+id,xPos+3*obsDistance,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
     randomizeCloud(1);
     randomizeBuilding(2);
     pointMeasure = points;
   }
 }
-function drawObjects() {
+function drawobstacles() {
   fill(0, 105, 29);
-  for(item in objList){
+  for(item in obsList){
     stroke('black');
-    rect(objList[item].x,objList[item].y,objList[item].width,objList[item].height);
-    rect(objList[item].x-5,objList[item].y+objList[item].height,objList[item].width+10,20);
+    rect(obsList[item].x,obsList[item].y,obsList[item].width,obsList[item].height);
+    rect(obsList[item].x-5,obsList[item].y+obsList[item].height,obsList[item].width+10,20);
 
-    rect(objList[item].x,objList[item].y+objList[item].height+230,objList[item].width,objList[item].height);
-    rect(objList[item].x-5,objList[item].y+objList[item].height+230,objList[item].width+10,20);
+    rect(obsList[item].x,obsList[item].y+obsList[item].height+230,obsList[item].width,obsList[item].height);
+    rect(obsList[item].x-5,obsList[item].y+obsList[item].height+230,obsList[item].width+10,20);
     noStroke();
   }
 }
-function updateObjects() {
-  objXposExtra = objSpd;
-  for(item in objList) {
-    objList[item].x -= objXposExtra;
+function updateobstacles() {
+  obsXposExtra = obsSpd;
+  for(item in obsList) {
+    obsList[item].x -= obsXposExtra;
   }
 }
 
 function testCollision() {
   if (gameMode !== 'easy') {
-    for(item in objList){
-      if (xPos+rectWidth > objList[item].x && xPos < objList[item].x+objList[item].width) {
-        if (yPos > objList[item].y+objList[item].height+20 && yPos < objList[item].y+objList[item].height+200-20) {
+    for(item in obsList){
+      if (xPos+rectWidth > obsList[item].x && xPos < obsList[item].x+obsList[item].width) {
+        if (yPos > obsList[item].y+obsList[item].height+20 && yPos < obsList[item].y+obsList[item].height+200-20) {
           return;
         }
         gameOver();
@@ -197,9 +181,9 @@ function gameOver() {
   msg = 'GAME OVER    "r" to retry';
   status = 'dead';
   validKey = 82;
-  objSpd = 0;
-  objCount = 3;
-  objXposExtra = 0;
+  obsSpd = 0;
+  obsCount = 3;
+  obsXposExtra = 0;
   sunPos = 0;
 }
 
@@ -216,7 +200,7 @@ function genCloud(id,x,y,length,height) {
   cloudList[id] = cloud;
 }
 genCloud('C1',1500,300,300,30);
-randomizeCloud(1);
+
 function randomizeCloud(c) {
   for (var x = 0; x < c; x++){
     if (Math.random()*1 > 0.5) {
@@ -233,9 +217,11 @@ function randomizeCloud(c) {
     }
   }
 }
+randomizeCloud(1);
+
 function updateClouds() {
   for(item in cloudList){
-    cloudList[item].x -= objSpd*0.5-1;
+    cloudList[item].x -= obsSpd*0.5-1;
     drawCloud(cloudList[item].x,cloudList[item].y,cloudList[item].length,cloudList[item].height);
   }
 }
@@ -256,7 +242,7 @@ function genBuilding(id,x,size,colour) {
   }
   buildingList[id] = building;
 }
-randomizeBuilding(3);
+
 function randomizeBuilding(c) {
   for (var x = 0; x < c; x++) {
     if (Math.random()*1>0.2) {
@@ -281,6 +267,8 @@ function randomizeBuilding(c) {
     }
   }
 }
+randomizeBuilding(3);
+
 function drawBuilding(x,size,colour) {
   fill(colour);
   rect(x,windowHeight*0.87-(size+200),size+100,size+200);
@@ -296,19 +284,21 @@ function drawBuilding(x,size,colour) {
 }
 function updateBuildings() {
   for(item in buildingList){
-    buildingList[item].x -= objSpd*0.8;
+    buildingList[item].x -= obsSpd*0.8;
     drawBuilding(buildingList[item].x,buildingList[item].size,buildingList[item].colour);
   }
-  buildingX -= objSpd*0.8;
+  buildingX -= obsSpd*0.8;
 }
 
+
+//sun and moon cycle and drawings
 function updateSun() {
   if (sunPosY > windowHeight) {
     backgroundClr = 'rgb(38, 42, 68)';
     windowLight = 'rgb(250, 214, 60)';
     cloudClr = 'rgb(88, 88, 88)';
     moonPosY += 0.2;
-    if (objSpd == 0) {
+    if (obsSpd == 0) {
       moonPosX += 0.3;
     }
     if (moonPosY > windowHeight+100) {
@@ -324,7 +314,7 @@ function updateSun() {
     moonPosY = -100;
     moonPosX = xPos*2;
     sunPosY += 0.2;
-    if (objSpd == 0) {
+    if (obsSpd == 0) {
       sunPosX += 0.3;
     }
     drawSun();
@@ -341,26 +331,37 @@ function drawSun() {
   circle(sunPosX,sunPosY,200)
 }
 
+
+
+//player image load
+function drawPlayer() {
+  image(playermodel,xPos,yPos,rectWidth,rectHeight);
+
+}
+
+
+
+
+//general function for drawing
 function draw() {
   clear();
   background(backgroundClr);
+  // put drawing code here
   updateSun();
   fill(66, 162, 93);
   rect(0,windowHeight*0.87,windowWidth,windowHeight);
-  // put drawing code here
   checkHeight();
   checkLength();
-  generateObstacles();
+  generateobstacles();
   updateClouds();
   updateBuildings();
-  drawObjects();
-  updateObjects();
+  drawobstacles();
+  updateobstacles();
   testCollision();
   fill(44, 203, 24);
   stroke('black');
   rect(0,windowHeight*0.90,windowWidth,windowHeight);
   noStroke();
-  fill(rectFill);
-  rect(xPos,yPos,rectWidth,rectHeight);
+  drawPlayer();
   writeMsg();
 }
