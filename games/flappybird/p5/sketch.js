@@ -61,7 +61,7 @@ var cloudClr = 'rgb(233, 233, 233)';
 function setup() {
   createCanvas(windowWidth,windowHeight);
   noStroke();
-  frameRate(60);
+  frameRate(30);
   obs('O1',1300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   obs('O2',1800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   obs('O3',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
