@@ -37,7 +37,7 @@ function obs(id,x,y,height) {
 var obsSpd = 6;
 var obsDistance = 500;
 var obsStarPosX = 2300;
-var obsCount = 3;
+var obsCount = 5;
 var obsXposExtra = 0;
 
 
@@ -67,6 +67,8 @@ function setup() {
   obs('O1',1300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   obs('O2',1800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   obs('O3',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O4',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O5',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   WIDTH = windowWidth;
   HEIGHT = windowHeight;
   playermodel = loadImage('../playermodel.png')//loads playermodel
@@ -92,12 +94,14 @@ function keyPressed() {
       yPos = 200;
       status = 'alive';
       obsSpd = 6;
-      obsCount = 3;
+      obsCount = 5;
       obsXposExtra = 0;
       obsList = {};
       obs('O1',1300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
       obs('O2',1800,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
       obs('O3',2300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+      obs('O4',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+      obs('O5',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
       randomizeCloud(3);
       points = 0;
       pointMeasure = 0;
@@ -347,6 +351,15 @@ function drawPlayer() {
   image(playermodel,xPos,yPos,rectWidth,rectHeight);
 }
 
+function backgroundClose() {
+  fill(44, 203, 24);
+  stroke('black');
+  rect(0,windowHeight*0.90,windowWidth,windowHeight);
+}
+function backgroundFar() {
+  fill(66, 162, 93);
+  rect(0,windowHeight*0.87,windowWidth,windowHeight);
+}
 
 
 
@@ -356,8 +369,7 @@ function draw() {
   background(backgroundClr);
   // put drawing code here
   updateSun();
-  fill(66, 162, 93);
-  rect(0,windowHeight*0.87,windowWidth,windowHeight);
+  backgroundFar();
   checkHeight();
   checkLength();
   generateobstacles();
@@ -366,9 +378,7 @@ function draw() {
   drawobstacles();
   updateobstacles();
   testCollision();
-  fill(44, 203, 24);
-  stroke('black');
-  rect(0,windowHeight*0.90,windowWidth,windowHeight);
+  backgroundClose();
   noStroke();
   drawPlayer();
   writeMsg();

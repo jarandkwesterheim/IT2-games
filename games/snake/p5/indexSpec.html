@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style media="screen">body{overflow: hidden}</style>
+    <meta charset="utf-8">
+    <meta name="viewport" width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0>
+    <style> body {padding: 0; margin: 0;} </style>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.2.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="p5.min.js"></script>
+    <script src="p5.sound.min.js"></script>
+    <script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+           https://firebase.google.com/docs/web/setup#available-libraries -->
+
+
+        // Your web app's Firebase configuration
+          var firebaseConfig = {
+          apiKey: "AIzaSyCk90eY2a2qa1FZtuei_N-aKp-kEqXidrQ",
+          authDomain: "chat-test-1f8d0.firebaseapp.com",
+          databaseURL: "https://chat-test-1f8d0.firebaseio.com",
+          projectId: "chat-test-1f8d0",
+          storageBucket: "chat-test-1f8d0.appspot.com",
+          messagingSenderId: "903842390094",
+          appId: "1:903842390094:web:b4badd014978bc6a04631f"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      //firebase
+      const db = firebase.database().ref();
+      var box = db.child('movingboxhting');
+
+
+      function preload(){
+        // put preload code here
+      }
+      let HEIGHT;
+      let WIDTH;
+      let side;
+      let block;
+      var level = [];
+
+
+      var id = 0;
+
+      let xPlayer;
+      let yPlayer;
+      var xAcc = 0;
+      var yAcc = 0;
+
+      let xSnacc;
+      let ySnacc;
+
+      function setup() {
+        createCanvas(windowWidth,windowHeight);
+        frameRate(60);
+        HEIGHT = height;
+        WIDTH = width;
+        if (height >= width) {
+          side = width*0.8;
+        }
+        else {
+          side = height*0.8;
+        }
+        block = side/20;
+        //level
+        for (var i = 0; i < 19; i++) {
+          level.push(level[i] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+        }
+        //player randomize
+        xPlayer = (WIDTH-side)/2+Math.floor(Math.random()*20)*block;
+        yPlayer = (HEIGHT-side)/2+Math.floor(Math.random()*20)*block;
+        xSnacc = (WIDTH-side)/2+(Math.floor(Math.random()*20)*block);
+        ySnacc = (HEIGHT-side)/2+(Math.floor(Math.random()*20)*block);
+      }
+
+
+      function drawLevel() {
+        var xStart = (WIDTH-side)/2;
+        var yStart = (HEIGHT-side)/2;
+
+        stroke('black');
+        rect(xStart,yStart,side,side);
+        stroke('rgb(171, 168, 168)');
+        for(var i = 1; i < 20; i++){
+          line(xStart+i*block,yStart,xStart+i*block,yStart+side);
+          line(xStart,yStart+i*block,xStart+side,yStart+i*block);
+        }
+      }
+      function drawPlayer() {
+
+        //draw player in canvas
+        fill('black');
+        rect(xPlayer,yPlayer,block,block);
+        noFill();
+      }
+      function drawSnacc() {
+        fill('red');
+        circle(xSnacc,ySnacc,block/2);
+        noFill();
+      }
+
+      function draw() {
+        // put drawing code here
+        clear();
+        drawLevel();
+        drawSnacc();
+        drawPlayer();
+      }
+      box.child('xplayer').on('value', snap => {
+        xPlayer = box.child('xplayer').val();
+      })
+      box.child('yplayer').on('value', snap => {
+        yPlayer = box.child('yplayer').val();
+      })
+      box.child('xsnacc').on('value', snap => {
+        xSnacc = box.child('xsnacc').val();
+      })
+      box.child('ysnacc').on('value', snap => {
+        ySnacc = box.child('ysnacc').val();
+      })
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
