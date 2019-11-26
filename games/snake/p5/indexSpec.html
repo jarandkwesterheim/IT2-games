@@ -31,6 +31,10 @@
       //firebase
       const db = firebase.database().ref();
       var box = db.child('movingboxhting');
+      var dbxplayer = box.child('xplayer');
+      var dbyplayer = box.child('yplayer');
+      var dbxsnacc = box.child('xsnacc');
+      var dbysnacc = box.child('ysnacc');
 
 
       function preload(){
@@ -55,7 +59,7 @@
 
       function setup() {
         createCanvas(windowWidth,windowHeight);
-        frameRate(60);
+        frameRate(30);
         HEIGHT = height;
         WIDTH = width;
         if (height >= width) {
@@ -109,17 +113,18 @@
         drawSnacc();
         drawPlayer();
       };
-      box.child('xplayer').on('value', snap => {
-        xPlayer = box.child('xplayer').val();
+
+      dbxplayer.on('value', snap => {
+        xPlayer = snap.val();
       });
-      box.child('yplayer').on('value', snap => {
-        yPlayer = box.child('yplayer').val();
+      dbyplayer.on('value', snap => {
+        yPlayer = snap.val();
       });
-      box.child('xsnacc').on('value', snap => {
-        xSnacc = box.child('xsnacc').val();
+      dbxsnacc.on('value', snap => {
+        xSnacc = snap.val();
       });
-      box.child('ysnacc').on('value', snap => {
-        ySnacc = box.child('ysnacc').val();
+      dbysnacc.on('value', snap => {
+        ySnacc = snap.val();
       });
     </script>
   </head>

@@ -18,8 +18,10 @@
 //firebase
 const db = firebase.database().ref();
 var box = db.child('movingboxhting');
-var players = box.child('players');
-
+var dbxplayer = box.child('xplayer');
+var dbyplayer = box.child('yplayer');
+var dbxsnacc = box.child('xsnacc');
+var dbysnacc = box.child('ysnacc');
 
 function preload(){
   // put preload code here
@@ -43,7 +45,7 @@ let ySnacc;
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
-  frameRate(60);
+  frameRate(30);
   HEIGHT = height;
   WIDTH = width;
   if (height >= width) {
@@ -134,6 +136,12 @@ function watchPlayer() {
     xAcc = 0;
   }
 }
+function updateDatabase() {
+  dbxplayer.set(xPlayer);
+  dbyplayer.set(yPlayer);
+  dbxsnacc.set(xSnacc);
+  dbysnacc.set(ySnacc);
+}
 
 function draw() {
   // put drawing code here
@@ -143,4 +151,5 @@ function draw() {
   drawSnacc();
   drawPlayer();
   watchSnacc();
+  updateDatabase();
 }
