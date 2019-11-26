@@ -57,11 +57,13 @@ var moonPosY = HEIGHT+200;
 var backgroundClr = 'rbg(100, 211, 222)';
 var cloudClr = 'rgb(233, 233, 233)';
 
+var fps = 60;
+
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
   noStroke();
-  frameRate(30);
+  frameRate(fps);
   obs('O1',1300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   obs('O2',1800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   obs('O3',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
@@ -74,6 +76,13 @@ function setup() {
 
 
 //FUNCTIONS
+
+function setFPS(x) {
+  fps=x;
+  setup();
+}
+
+
 function keyPressed() {
   if (keyCode === validKey) {
     validKey = 32;
@@ -178,7 +187,7 @@ function testCollision() {
   }
 }
 function gameOver() {
-  msg = 'GAME OVER    "r" to retry';
+  msg = 'GAME OVER    "R" to retry';
   status = 'dead';
   validKey = 82;
   obsSpd = 0;
@@ -336,7 +345,6 @@ function drawSun() {
 //player image load
 function drawPlayer() {
   image(playermodel,xPos,yPos,rectWidth,rectHeight);
-
 }
 
 
