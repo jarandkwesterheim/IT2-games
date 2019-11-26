@@ -36,7 +36,7 @@ function obs(id,x,y,height) {
 };
 var obsSpd = 6;
 var obsDistance = 500;
-var obsStarPosX = 2300;
+var obsStarPosX = 3500;
 var obsCount = 5;
 var obsXposExtra = 0;
 
@@ -152,7 +152,7 @@ function checkLength() {
 
 function generateobstacles() {
   if (points > pointMeasure) {
-    var id = points+3;
+    var id = points+5;
     obs('O'+id,xPos+5*obsDistance,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
     randomizeCloud(1);
     randomizeBuilding(2);
