@@ -36,7 +36,6 @@ function obs(id,x,y,height) {
 };
 var obsSpd = 6;
 var obsDistance = 500;
-var obsStarPosX = 2300;
 var obsCount = 5;
 var obsXposExtra = 0;
 
@@ -64,11 +63,11 @@ function setup() {
   createCanvas(windowWidth,windowHeight);
   noStroke();
   frameRate(fps);
-  obs('O1',1300,100-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-  obs('O2',1800,100-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-  obs('O3',2300,100-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-  obs('O4',2900,100-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-  obs('O5',3500,100-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O1',1300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O2',1800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O3',2300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O4',2800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+  obs('O5',3300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   WIDTH = windowWidth;
   HEIGHT = windowHeight;
   playermodel = loadImage('../playermodel.png')//loads playermodel
@@ -97,11 +96,11 @@ function keyPressed() {
       obsCount = 5;
       obsXposExtra = 0;
       obsList = {};
-      obs('O1',1300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
-      obs('O2',1800,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
-      obs('O3',2300,100-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
-      obs('O4',2900,100-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
-      obs('O5',3500,100-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+      obs('O1',1300,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+      obs('O2',1800,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+      obs('O3',2300,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+      obs('O4',2800,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
+      obs('O5',3300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
       randomizeCloud(3);
       points = 0;
       pointMeasure = 0;
