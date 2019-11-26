@@ -56,10 +56,11 @@ var moonPosY = HEIGHT+200;
 var backgroundClr = 'rbg(100, 211, 222)';
 var cloudClr = 'rgb(233, 233, 233)';
 
-var fps = 60;
+var fps = 30;
 
 
 function setup() {
+  // put setup code here
   createCanvas(windowWidth,windowHeight);
   noStroke();
   frameRate(fps);
@@ -71,7 +72,6 @@ function setup() {
   WIDTH = windowWidth;
   HEIGHT = windowHeight;
   playermodel = loadImage('../playermodel.png')//loads playermodel
-  // put setup code here
 }
 
 
