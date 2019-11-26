@@ -36,7 +36,7 @@ function obs(id,x,y,height) {
 };
 var obsSpd = 6;
 var obsDistance = 500;
-var obsStarPosX = 3500;
+var obsStarPosX = 2300;
 var obsCount = 5;
 var obsXposExtra = 0;
 
