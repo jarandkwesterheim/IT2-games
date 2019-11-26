@@ -153,7 +153,7 @@ function checkLength() {
 function generateobstacles() {
   if (points > pointMeasure) {
     var id = points+3;
-    obs('O'+id,xPos+3*obsDistance,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
+    obs('O'+id,xPos+5*obsDistance,-windowHeight/2-Math.random()*windowHeight/3-70,windowHeight);
     randomizeCloud(1);
     randomizeBuilding(2);
     pointMeasure = points;
