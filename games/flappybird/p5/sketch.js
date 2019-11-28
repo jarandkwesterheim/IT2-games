@@ -20,7 +20,7 @@ var yAcc = 0;
 
 var status = 'alive';
 var validKey = 32;
-var msg = 'press "SPACE" to fly';
+var msg = 'press SPACE to fly';
 
 var obsList = {};
 function obs(id,x,y,height) {
@@ -56,7 +56,7 @@ var moonPosY = HEIGHT+200;
 var backgroundClr = 'rbg(100, 211, 222)';
 var cloudClr = 'rgb(233, 233, 233)';
 
-var fps = 30;
+var fps = 60;
 
 
 function setup() {
@@ -71,7 +71,7 @@ function setup() {
   obs('O5',3300,-windowHeight/2-Math.random()*windowHeight/3-40,windowHeight);
   WIDTH = windowWidth;
   HEIGHT = windowHeight;
-  playermodel = loadImage('../playermodel.png')//loads playermodel
+  playermodel = loadImage('playermodel.png')//loads playermodel
 }
 
 
@@ -89,7 +89,7 @@ function keyPressed() {
     validKey = 32;
     if (status == 'dead') {
       yAcc = -3;
-      msg = 'press "SPACE" to fly';
+      msg = 'press SPACE to fly';
       yPos = 200;
       status = 'alive';
       obsSpd = 6;
@@ -190,7 +190,7 @@ function testCollision() {
   }
 }
 function gameOver() {
-  msg = 'GAME OVER    "R" to retry';
+  msg = 'GAME OVER press R to retry';
   status = 'dead';
   validKey = 82;
   obsSpd = 0;

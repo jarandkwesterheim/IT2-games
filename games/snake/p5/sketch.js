@@ -20,8 +20,8 @@ const db = firebase.database().ref();
 var box = db.child('movingboxhting');
 var dbxplayer = box.child('xplayer');
 var dbyplayer = box.child('yplayer');
-var dbxsnacc = box.child('xsnacc');
-var dbysnacc = box.child('ysnacc');
+var dbxBall = box.child('xBall');
+var dbyBall = box.child('yBall');
 
 function preload(){
   // put preload code here
@@ -40,8 +40,8 @@ let yPlayer;
 var xAcc = 0;
 var yAcc = 0;
 
-let xSnacc;
-let ySnacc;
+let xBall;
+let yBall;
 
 function setup() {
   createCanvas(windowWidth,windowHeight);
@@ -62,49 +62,23 @@ function setup() {
   //player randomize
   xPlayer = (WIDTH-side)/2+Math.floor(Math.random()*20)*block;
   yPlayer = (HEIGHT-side)/2+Math.floor(Math.random()*20)*block;
-  xSnacc = (WIDTH-side)/2+(Math.floor(Math.random()*20)*block);
-  ySnacc = (HEIGHT-side)/2+(Math.floor(Math.random()*20)*block);
+  xBall = (WIDTH-side)/2+(Math.floor(Math.random()*20)*block);
+  yBall = (HEIGHT-side)/2+(Math.floor(Math.random()*20)*block);
 }
 
-function keyPressed() {
-  if (keyCode === UP_ARROW && yAcc !== 1*block) {
-    xAcc = 0;
-    yAcc = -1/6;
-  }
-  else if (keyCode === DOWN_ARROW && yAcc !== -1*block) {
-    xAcc = 0;
-    yAcc = 1/6;
-  }
-  else if (keyCode === LEFT_ARROW && xAcc !== 1*block) {
-    xAcc = -1/6;
-    yAcc = 0;
-  }
-  else if (keyCode === RIGHT_ARROW && xAcc !== -1*block) {
-    xAcc = 1/6;
-    yAcc = 0;
-  }
-  else {
-    yAcc = 0;
-    xAcc = 0;
-  }
-
-
-  xAcc = xAcc*block;
-  yAcc = yAcc*block;
+if(keyIsDown(RIGHT_ARROW)) {
+  yPlayer += -(1/2.5)*block;
+}
+if(keyIsDown(LEFT_ARROW)) {
+  yPlayer = (1/2.5)*block;
 }
 
 
 function drawLevel() {
   var xStart = (WIDTH-side)/2;
-  var yStart = (HEIGHT-side)/2;
+  var yStart = (HEIGHT-side*1.2)/2;
 
-  stroke('black');
   rect(xStart,yStart,side,side);
-  stroke('rgb(171, 168, 168)');
-  for(var i = 1; i < 20; i++){
-    line(xStart+i*block,yStart,xStart+i*block,yStart+side);
-    line(xStart,yStart+i*block,xStart+side,yStart+i*block);
-  }
 }
 function drawPlayer() {
   //update player position
@@ -113,22 +87,12 @@ function drawPlayer() {
 
   //draw player in canvas
   fill('black');
-  rect(xPlayer,yPlayer,block,block);
+  rect(xPlayer,yPlayer,block,3*block);
   noFill();
 }
-function genSnacc() {
-  xSnacc = (WIDTH-side)/2+(Math.floor(Math.random()*20)*block);
-  ySnacc = (HEIGHT-side)/2+(Math.floor(Math.random()*20)*block);
-}
-function drawSnacc() {
-  fill('red');
-  circle(xSnacc+block/2,ySnacc+block/2,block/2);
-  noFill();
-}
-function watchSnacc() {
-  if (Math.round((ySnacc+0.5*block)/block) == Math.round((yPlayer+0.5*block)/block) && Math.round((xSnacc+0.5*block)/block) == Math.round((xPlayer+0.5*block)/block)) {
-    genSnacc();
-  }
+function genBall() {
+  xBall = (WIDTH-side)/2+(Math.floor(Math.random()*20)*block);
+  yBall = (HEIGHT-side)/2+(Math.floor(Math.random()*20)*block);
 }
 function watchPlayer() {
   if (xPlayer < (WIDTH-side)/2 || xPlayer+block > (WIDTH-side)/2+side || yPlayer < ((HEIGHT-side)/2) || yPlayer+block > (HEIGHT-side)/2+side) {
@@ -139,17 +103,14 @@ function watchPlayer() {
 function updateDatabase() {
   dbxplayer.set(xPlayer);
   dbyplayer.set(yPlayer);
-  dbxsnacc.set(xSnacc);
-  dbysnacc.set(ySnacc);
+  dbxBall.set(xBall);
+  dbyBall.set(yBall);
 }
 
 function draw() {
   // put drawing code here
   clear();
   drawLevel();
-  watchPlayer();
-  drawSnacc();
   drawPlayer();
-  watchSnacc();
   updateDatabase();
 }
