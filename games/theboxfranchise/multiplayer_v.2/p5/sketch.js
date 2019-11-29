@@ -154,14 +154,15 @@ function testCollision() {
 
 
   //tests collision with other balls
-  var difX = p1.x-p2.x;
-  var difY = p1.y-p2.y;
-  var collectiveSpdX = p1.spdX + p2.spdX;
-  var collectiveSpdY = p1.spdY + p2.spdY;
-  var difCenter = sqrt(difX^2+difY^2);
-  if (difCenter < (p1.r/2+p2.r/2)/width*100) {
+  var xPos1 = p1.x*width/100;
+  var yPos1 = p1.y*height/100;
+  var xPos2 = p2.x*width/100;
+  var yPos2 = p2.y*height/100;
+  var raduis1 = p1.r/2;
+  var radius2 = p2.r/2;
+  if ((xPos2-xPos1)^2 + (yPos2-yPos1)^2 <= (radius1+radius2)^2) {
     stroke('black');
-    line(p1.x*width/100,p1.y*height/100,p2.x*width/100,p2.y*height/100);
+    line(xPos1,yPos1,xPos2,yPos2);
     noStroke();
   }
 }
