@@ -133,6 +133,7 @@ function keyReleased() {
 
 
 function testCollision() {
+  //tests Collision with canvas border
   var radius = id.r/2;
   if (radius > (id.x*width/100)) {//crash left side of canvas
     id.x = radius/width*100;
@@ -150,6 +151,9 @@ function testCollision() {
     id.y = (height-radius)/height*100;
     id.spdY = -id.spdY/3;
   }
+
+
+  //tests collision with other balls
 }
 
 
@@ -350,5 +354,10 @@ function draw() {
   }
   else if (status == 'menu'){
     drawMenu();
+  }
+  else if(status == 'spec') {
+    id = 0;
+    drawPlayer(p1);
+    drawPlayer(p2);
   }
 }
