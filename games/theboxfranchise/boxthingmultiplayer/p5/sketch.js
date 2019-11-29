@@ -66,13 +66,15 @@ function setup() {
   yBall = (HEIGHT-side)/2+(Math.floor(Math.random()*20)*block);
 }
 
-if(keyIsDown(RIGHT_ARROW)) {
-  yPlayer += -(1/2.5)*block;
-}
-if(keyIsDown(LEFT_ARROW)) {
-  yPlayer = (1/2.5)*block;
-}
 
+function checkKey() {
+  if(keyIsDown(RIGHT_ARROW)) {
+    yPlayer += -(1/2.5)*block;
+  }
+  if(keyIsDown(LEFT_ARROW)) {
+    yPlayer = (1/2.5)*block;
+  }
+}
 
 function drawLevel() {
   var xStart = (WIDTH-side)/2;
@@ -109,6 +111,7 @@ function updateDatabase() {
 
 function draw() {
   // put drawing code here
+  checkKey();
   clear();
   drawLevel();
   drawPlayer();
