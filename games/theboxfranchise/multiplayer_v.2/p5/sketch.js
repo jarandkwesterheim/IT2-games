@@ -158,7 +158,7 @@ function testCollision() {
   var yPos1 = p1.y*height/100;
   var xPos2 = p2.x*width/100;
   var yPos2 = p2.y*height/100;
-  var raduis1 = p1.r/2;
+  var radius1 = p1.r/2;
   var radius2 = p2.r/2;
   if ((xPos2-xPos1)^2 + (yPos2-yPos1)^2 <= (radius1+radius2)^2) {
     stroke('black');
