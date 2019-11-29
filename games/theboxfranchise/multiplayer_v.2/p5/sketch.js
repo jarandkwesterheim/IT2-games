@@ -154,6 +154,14 @@ function testCollision() {
 
 
   //tests collision with other balls
+  var difX = p1.x-p2.x;
+  var difY = p1.y-p2.y;
+  var collectiveSpdX = p1.spdX + p2.spdX;
+  var collectiveSpdY = p1.spdY + p2.spdY;
+  var difCenter = sqrt(difX^2+difY^2);
+  if (difCenter > (p1.r+p2.r)/width*100) {
+    console.log('crash');
+  }
 }
 
 
