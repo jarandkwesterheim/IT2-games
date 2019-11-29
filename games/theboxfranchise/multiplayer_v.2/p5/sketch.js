@@ -161,7 +161,7 @@ function testCollision() {
   var difCenter = sqrt(difX^2+difY^2);
   if (difCenter < (p1.r/2+p2.r/2)/width*100) {
     stroke('black');
-    line(p1.x,p1.y,p2.x,p2.y);
+    line(p1.x*width/100,p1.y*height/100,p2.x*width/100,p2.y*height/100);
     noStroke();
   }
 }
