@@ -160,10 +160,9 @@ function testCollision() {
   var collectiveSpdY = p1.spdY + p2.spdY;
   var difCenter = sqrt(difX^2+difY^2);
   if (difCenter < (p1.r/2+p2.r/2)/width*100) {
-    p1.spdX = -p1.spdX;
-    p1.spdY = -p1.spdY;
-    p2.spdX = -p2.spdX;
-    p2.spdY = -p2.spdY;
+    stroke('black');
+    line(p1.x,p1.y,p2.x,p2.y);
+    noStroke();
   }
 }
 
