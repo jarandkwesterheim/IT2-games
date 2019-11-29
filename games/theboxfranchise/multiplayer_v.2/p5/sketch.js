@@ -160,11 +160,10 @@ function testCollision() {
   var collectiveSpdY = p1.spdY + p2.spdY;
   var difCenter = sqrt(difX^2+difY^2);
   if (difCenter < (p1.r/2+p2.r/2)/width*100) {
-    console.log('crash');
-    console.log('dif x is: '+difX);
-    console.log('dif y is: '+difY);
-    console.log('dif center is: '+difCenter);
-    console.log('radius is: '+(p1.r/2+p2.r/2)/width*100);
+    p1.spdX = -p1.spdX;
+    p1.spdY = -p1.spdY;
+    p2.spdX = -p2.spdX;
+    p2.spdY = -p2.spdY;
   }
 }
 
