@@ -272,13 +272,13 @@ function resetFirebase(code) {
   if (code == 9098) {
     globalstatus.set('menu');
     playercount.set(0);
-    dbplayer1x = 10;
-    dbplayer1y = 50;
-    dbplayer1r = 70;
+    dbplayer1x.set(0);
+    dbplayer1y.set(50);
+    dbplayer1r.set(70);
 
-    dbplayer2x = 90;
-    dbplayer2y = 50;
-    dbplayer2r = 70;
+    dbplayer2x.set(90);
+    dbplayer2y.set(50);
+    dbplayer2r.set(70);
 
     console.log('reset');
     window.location.reload(true);
