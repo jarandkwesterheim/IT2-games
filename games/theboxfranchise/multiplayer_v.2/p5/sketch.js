@@ -281,6 +281,7 @@ function resetFirebase(code) {
     dbplayer2r = 70;
 
     console.log('reset');
+    window.location.reload(true);
   }
 }
 
