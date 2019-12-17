@@ -1,0 +1,16 @@
+body {
+  padding: 0;
+  margin: 0;
+  background-image: url('/img/hexagonWallpaper.jpg');
+  background-size: cover;
+  cursor: none;
+}
+canvas {
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  box-shadow: 0 0 10px 5px #007be1,inset 0 0 10px 5px #007be1;
+  border: solid 3px #007be1;
+  border-radius: 9px;
+}
