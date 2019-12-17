@@ -92,7 +92,7 @@ function Menu() {
     text('PONG',canvasPos.center,canvasPos.fourth);
     textSize(canvas.w/17);
     fill(menuText2)
-    text('SINGLPLAYER',canvasPos.center,2*canvasPos.fourth);
+    text('SINGLEPLAYER',canvasPos.center,2*canvasPos.fourth);
     fill(menuText3)
     text('MULTIPLAYER',canvasPos.center,3*canvasPos.fourth);
   }
