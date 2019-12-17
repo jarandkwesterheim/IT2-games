@@ -93,14 +93,12 @@ function draw() {
       online.setPos('ball')
     }
     else if (playerId == 'enemy') {
-      enemy.setDir(keyList.w,keyList.s)
+      enemy.setDir(keyList.o,keyList.l)
       online.setPos('enemy')
       enemy.getPos();
       online.getPos('player');
       online.getPos('ball');
     }
-    //check collition
-    ball.testBall();
     // put drawing code here
     player.show();
     enemy.show();
