@@ -85,12 +85,15 @@ function draw() {
     if (playerId == 'player') {
       player.setDir(keyList.w,keyList.s)
       online.setPos('player')
-      online.setPos('ball')
       player.getPos();
       online.getPos('enemy')
+      ball.getPos();
+
+      ball.testBall();
+      online.setPos('ball')
     }
     else if (playerId == 'enemy') {
-      enemy.setDir(keyList.o,keyList.l)
+      enemy.setDir(keyList.w,keyList.s)
       online.setPos('enemy')
       enemy.getPos();
       online.getPos('player');
