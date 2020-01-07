@@ -2,7 +2,7 @@ function Ball() {
   canvas = new Canvas;
   player = new Player;
   enemy = new Enemy;
-  var side,player1Score,player2Score;
+  var player1Score,player2Score;
   var ballstatus = 'ready';
   var timer = 0;
   this.player1Score = 0;
@@ -22,6 +22,8 @@ function Ball() {
   this.minSpd = 0;
   this.boost = canvas.w/1260;
 
+  this.side = 0;
+
   this.resetGame = function() {
     timer = -100;
     player.pos.y = canvas.h/2-player.h/2;
@@ -31,11 +33,11 @@ function Ball() {
   }
 
   this.addScore = function() {
-    if (side == 2) {
+    if (this.side == 2) {
       this.player1Score += 1;
       if (this.player1Score > 4) {this.resetGame()}
     }
-    else if (side == 1) {
+    else if (this.side == 1) {
       this.player2Score += 1;
       if (this.player2Score > 4) {this.resetGame()}
     }
@@ -81,22 +83,22 @@ function Ball() {
       }
 
       //test collition with bars
-      //test which side
+      //test which this.side
       var xOverlap,yOverlap, vecDisOverlap;
       if (this.pos.x > canvas.w/2) {
-        if (side !== 2) {
-          side = 2;
+        if (this.side !== 2) {
+          this.side = 2;
         }
       }
       if (this.pos.x < canvas.w/2) {
-        if (side !== 1) {
-          side = 1;
+        if (this.side !== 1) {
+          this.side = 1;
         }
       }
 
 
       //test 1st half
-      if (side == 1) {
+      if (this.side == 1) {
         if (this.pos.x-this.r < player.pos.x) {xOverlap = true;} else {xOverlap = false}
         if (this.pos.y > player.pos.y && this.pos.y < player.pos.y+enemy.h) {yOverlap = true;} else {yOverlap = false}
 
@@ -118,7 +120,7 @@ function Ball() {
         }
       }
       //test 2nd half
-      if (side == 2) {
+      if (this.side == 2) {
         if (this.pos.x+this.r > enemy.pos.x) {xOverlap = true;}else {xOverlap = false}
         if (this.pos.y > enemy.pos.y && this.pos.y < enemy.pos.y+enemy.h) {yOverlap = true}else {yOverlap = false}
 
@@ -141,7 +143,7 @@ function Ball() {
       var multiplier = 0;
       if (timer > 120) {
         ballstatus = 'alive';
-        if (side == 1) {
+        if (this.side == 1) {
           multiplier = 1;
         }
         else {

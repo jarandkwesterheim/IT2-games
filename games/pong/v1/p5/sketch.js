@@ -2,7 +2,7 @@ function preload(){
   // put preload code here
 }
 
-var canvas,player,enemy,ball,menu,online,mode;
+var canvas,player,enemy,ball,menu,online,mode,ai;
 var clr = [255,'#007be1','rgb(255, 136, 13)','#8e17c6', 'rgb(43,43,43)'];
 var keyList = {
   w:false,
@@ -19,6 +19,8 @@ function setup() {
   ball = new Ball;
   menu = new Menu;
   online = new Online;
+  ai = new AI();
+
   createCanvas(canvas.w,canvas.h);
   // put setup code here
   noStroke();
@@ -67,9 +69,31 @@ function draw() {
     ball.show();
     ball.drawScore();
   }
+  else if (mode == 'singleplayerAi') {
+    //update functions
+    player.setDir(keyList.w,keyList.s)
+    player.getPos();
+
+    ball.getPos();
+
+    ai.getPos();
+
+
+    //check collition
+    ball.testBall();
+    // put drawing code here
+    player.show();
+    enemy.show();
+    ball.show();
+    ball.drawScore();
+  }
   else if (mode == 'pause') {
     menu.update();
     menu.showPause();
+  }
+  else if (mode == 'singleplayerChoice') {
+    menu.update();
+    menu.showSingleplayerChoice();
   }
   else if (mode == 'chooseLobbies') {
     menu.update();

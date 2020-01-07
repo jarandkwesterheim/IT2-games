@@ -4,7 +4,8 @@ function Menu() {
   ball = new Ball;
   online = new Online;
 
-  var clientY = 0;
+  let clientY;
+  clientY = 0;
 
 
   let menuText1, menuText2, menuText3, menuText4;
@@ -30,12 +31,20 @@ function Menu() {
     var canvasMargin = (window.innerHeight-canvas.h)/2+canvas.h/20;
     clientY = e.clientY-canvasMargin;
     clientY = constrain(clientY,0,canvas.h-(canvas.h/10));
+
+
+    //problem: clientY er 0 utenfor denne funksjonen
   }
   document.body.onclick = function() {
 
     //menu button clikced
-    if (menuText2 == clr[0] && mode == 'menu') {mode = 'singleplayer';}
+    if (menuText2 == clr[0] && mode == 'menu') {mode = 'singleplayerChoice';}
     if (menuText3 == clr[0] && mode == 'menu') {mode = 'chooseLobbies';}
+
+
+    //singleplayerChoice clicked
+    if (menuText1 == clr[0] && mode == 'singleplayerChoice') {mode = 'singleplayer'}
+    if (menuText3 == clr[0] && mode == 'singleplayerChoice') {mode = 'singleplayerAi'}
 
 
 
@@ -58,6 +67,7 @@ function Menu() {
     menuText2 = clr[2];
     menuText3 = clr[2];
     menuText4 = clr[2];
+
     //draw sidebars
     fill(clr[1])
     rect(bars.pos.x,bars.pos.y,bars.w,bars.h);
@@ -104,6 +114,15 @@ function Menu() {
     text('RESUME',canvasPos.center,1*canvasPos.fourth);
     fill(menuText3)
     text('EXIT GAME',canvasPos.center,3*canvasPos.fourth);
+  }
+
+  this.showSingleplayerChoice = function() {
+    //draw menu
+    textSize(canvas.w/17);
+    fill(menuText1)
+    text('2v2',canvasPos.center,1*canvasPos.fourth);
+    fill(menuText3)
+    text('Against AI',canvasPos.center,3*canvasPos.fourth);
   }
 
 
