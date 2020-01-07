@@ -88,13 +88,14 @@ function displayPresets() {
 
 
 startRunning.onclick = function() {
+  
   let newList;
   newList = {
     dato:date+'. '+month,
     dag:day,
     gruppe:group,
     start:hours+':'+minutes,
-    slutt:hours+3+':'+minutes
+    slutt:hours+workingHours+':'+minutes
   }
 
 
