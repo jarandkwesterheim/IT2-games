@@ -9,7 +9,14 @@
     <div class="choose">
     </div>
     <div class="display">
-      <table id="hourReg"></table>
+      <table id="hourReg">
+        <tr>
+          <th>DATO</th>
+          <th>GRUPPE</th>
+          <th>START</th>
+          <th>SLUTT</th>
+        </tr>
+      </table>
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -23,7 +30,14 @@
     <script type="text/javascript">
       let load;
       load = new Load;
-      load.genBtn();
+      load.loadHours('2019/november');
+      load.loadHours('2019/desember');
+      load.loadHours('2020/januar');
+      load.loadHours('2020/februar');
+      load.loadHours('2020/mars');
+      load.loadHours('2020/april');
+      load.loadHours('2020/mai');
+
     </script>
   </body>
 </html>

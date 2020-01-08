@@ -103,6 +103,9 @@ function displayPresets() {
 
 
 startRunning.onclick = function() {
+  if (status == "Teller") {
+    return;
+  }
   status = "Teller";
   updateGraphic();
   var workingHours = hourInp.value;
@@ -143,6 +146,32 @@ startRunning.onclick = function() {
 
 //function for loading excel page
 function Load() {
-  this.genBtn = function() {
+  this.loadHours = function(dbNewRef) {
+    var ref = firebase.database().ref(dbNewRef);
+    ref.on('child_added', snap => {
+      genHTML(snap.val());
+    })
   }
+}
+function genHTML(snap) {
+  console.log(snap);
+  var hourReg = document.querySelector('#hourReg');
+  hourReg.innerHTML += `
+  <tr>
+    <td>${snap.dato}</td>
+    <td>${snap.gruppe}</td>
+    <td>${snap.start}</td>
+    <td>${snap.slutt}</td>
+  </tr>
+  `
+}
+function genBarrier(snap) {
+  hourReg.innerHTML += `
+  <tr>
+    <th>${snap}</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  `
 }
