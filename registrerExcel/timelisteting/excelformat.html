@@ -2,25 +2,14 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>timeliste</title>
-    <link rel="stylesheet" href="style.css">
+    <title>excel format</title>
+    <link rel="stylesheet" href="styleExcel.css">
   </head>
   <body>
-    <div class="displayPreset">
-      <div class="preset--date"></div>
-      <div class="preset--hours"></div>
-      <div class="preset--group"></div>
+    <div class="choose">
     </div>
-
-
-    <div class="startRunning">
-      <b id="statusTarget">START</b>
-    </div>
-    <div class="setWorkingHours">
-      <input type="number" name="workingHours" value="3" id="hourInp">
-    </div>
-    <div class="redirectToThisMonth">
-      <a href="excelformat.html">Hent ut Timer</a>
+    <div class="display">
+      <table id="hourReg"></table>
     </div>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -31,5 +20,10 @@
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
     <script src="script.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      let load;
+      load = new Load;
+      load.genBtn();
+    </script>
   </body>
 </html>

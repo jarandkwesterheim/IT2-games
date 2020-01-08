@@ -18,14 +18,29 @@
 const db = firebase.database().ref();
 
 
-let now, date, hours, minutes, month, montInt, day, year, group;
+let now, date, hours, minutes, month, montInt, day, year, group, status;
 
 
 var startRunning = document.querySelector('.startRunning');
+var statusTarget = document.querySelector('#statusTarget');
+status = "Start";
+function updateGraphic() {
+  if (status == "Start") {
+    startRunning.style = 'background-color: rgb(0, 212, 40, 0.1);';
+    statusTarget.innerHTML = "START";
+  }
+  else {
+    startRunning.style = 'background-color: rgb(182, 49, 0, 0.1);';
+    statusTarget.innerHTML = "TELLER";
+  }
+}
+updateGraphic();
 
 var presetDate = document.querySelector('.preset--date');
 var presetHours = document.querySelector('.preset--hours')
 var presetGroup = document.querySelector('.preset--group');
+
+var hourInp = document.querySelector('#hourInp');
 
 
 
@@ -88,23 +103,46 @@ function displayPresets() {
 
 
 startRunning.onclick = function() {
-  
+  status = "Teller";
+  updateGraphic();
+  var workingHours = hourInp.value;
+  var workingMinutes = 0;
+  if (workingHours%1 !== 0) {
+    workingHours = Math.floor(workingHours);
+    workingMinutes = 30;
+  }
+  var endMin = Number(minutes)+Number(workingMinutes)
+  var endHour = Number(hours)+Number(workingHours)
+  endHour = endHour%24;
+  if (endHour < 10) {
+    endHour = '0'+endHour.toString();
+  }
+  if (endMin < 10) {
+    endMin = '0'+endMin.toString();
+  }
   let newList;
   newList = {
     dato:date+'. '+month,
     dag:day,
     gruppe:group,
     start:hours+':'+minutes,
-    slutt:hours+workingHours+':'+minutes
+    slutt:endHour+':'+endMin
   }
 
 
   if (date < 10) {date = "0"+date}
   if (monthInt < 10) {monthInt = "0"+monthInt}
 
-  console.log('adding child: '+date.toString()+monthInt.toString()+(year-2000).toString());
+  var key = date.toString()+monthInt.toString()+(year-2000).toString();
+  console.log(newList);
+  //pushing to firebase
+  db.child(year).child(month.toLowerCase()).child(key).set(newList);
+}
 
 
 
-  console.log(newList)
+//function for loading excel page
+function Load() {
+  this.genBtn = function() {
+  }
 }
