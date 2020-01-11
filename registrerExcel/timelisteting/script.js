@@ -18,7 +18,7 @@
 const db = firebase.database().ref();
 
 
-let now, date, hours, minutes, month, montInt, day, year, group, status;
+let now, date, hours, minutes, month, montInt, day, year, group, status, srch;
 
 
 var startRunning = document.querySelector('.startRunning');
@@ -129,7 +129,8 @@ startRunning.onclick = function() {
     dag:day,
     gruppe:group,
     start:hours+':'+minutes,
-    slutt:endHour+':'+endMin
+    slutt:endHour+':'+endMin,
+    anttimer:hourInp.value
   }
 
 
@@ -145,13 +146,11 @@ startRunning.onclick = function() {
 
 
 //function for loading excel page
-function Load() {
-  this.loadHours = function(dbNewRef) {
-    var ref = firebase.database().ref(dbNewRef);
-    ref.on('child_added', snap => {
-      genHTML(snap.val());
-    })
-  }
+function loadHours(dbNewRef) {
+  var ref = firebase.database().ref(dbNewRef);
+  ref.on('child_added', snap => {
+    genHTML(snap.val());
+  })
 }
 function genHTML(snap) {
   console.log(snap);
@@ -162,6 +161,7 @@ function genHTML(snap) {
     <td>${snap.gruppe}</td>
     <td>${snap.start}</td>
     <td>${snap.slutt}</td>
+    <td>${snap.anttimer}</td>
   </tr>
   `
 }
@@ -174,4 +174,39 @@ function genBarrier(snap) {
     <th></th>
   </tr>
   `
+}
+function makeTopBar() {
+  hourReg.innerHTML = `
+  <tr>
+    <th>DATO</th>
+    <th>GRUPPE</th>
+    <th>START</th>
+    <th>SLUTT</th>
+    <th>ANTALL TIMER</th>
+  </tr>
+  `
+}
+
+function loadAll() {
+  srch = document.querySelector('#srch');
+  loadHours('2019/november');
+  loadHours('2019/desember');
+  loadHours('2020/januar');
+  loadHours('2020/februar');
+  loadHours('2020/mars');
+  loadHours('2020/april');
+  loadHours('2020/mai');
+}
+
+function srchPressed(evt) {
+  let key = evt.keyCode;
+  if (srch.value.length < 1) {
+    makeTopBar();
+    loadAll();
+    return;
+  }
+  if (key == 13) {
+    makeTopBar();
+    loadHours(srch.value);
+  }
 }

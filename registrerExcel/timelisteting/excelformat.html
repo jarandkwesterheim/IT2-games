@@ -7,6 +7,7 @@
   </head>
   <body>
     <div class="choose">
+      <input type="text" name="" value="" id="srch" placeholder="2019/desember" onkeyup="srchPressed(event)">
     </div>
     <div class="display">
       <table id="hourReg">
@@ -15,6 +16,7 @@
           <th>GRUPPE</th>
           <th>START</th>
           <th>SLUTT</th>
+          <th>ANTALL TIMER</th>
         </tr>
       </table>
     </div>
@@ -28,15 +30,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
     <script src="script.js" charset="utf-8"></script>
     <script type="text/javascript">
-      let load;
-      load = new Load;
-      load.loadHours('2019/november');
-      load.loadHours('2019/desember');
-      load.loadHours('2020/januar');
-      load.loadHours('2020/februar');
-      load.loadHours('2020/mars');
-      load.loadHours('2020/april');
-      load.loadHours('2020/mai');
+      loadAll();
 
     </script>
   </body>
