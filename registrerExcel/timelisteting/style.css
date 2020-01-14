@@ -16,6 +16,10 @@ body {
 .displayPreset>div{
   border: 2px solid grey;
 }
+.select--group {
+  font-size: 60px;
+  width: 100%;
+}
 
 
 
@@ -34,12 +38,11 @@ body {
   width: 100%;
 }
 
-.setWorkingHours{
-  font-size: 60px;
-  width: 20%;
+.select--hours--container{
+  width: 40%;
   margin: auto;
 }
-.setWorkingHours>input {
+.select--hours {
   text-align: center;
   position: relative;
   width: 100%;

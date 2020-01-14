@@ -18,7 +18,7 @@
 const db = firebase.database().ref();
 
 
-let now, date, hours, minutes, month, montInt, day, year, group, status, srch;
+let now, date, hours, minutes, month, montInt, day, year, status, srch;
 
 
 var startRunning = document.querySelector('.startRunning');
@@ -38,21 +38,20 @@ updateGraphic();
 
 var presetDate = document.querySelector('.preset--date');
 var presetHours = document.querySelector('.preset--hours')
-var presetGroup = document.querySelector('.preset--group');
+var presetGroup = document.querySelector('.select--group');
 
-var hourInp = document.querySelector('#hourInp');
+var hourInp = document.querySelector('.select--hours');
 
 
 
 var dayArr = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 var monthArr = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"];
-var groupArr = ["LIL Barmark Freeski", "LIL Freeski"];
+var groupArr = [];
 
 
 
-
-db.child("site").child("groups").child("currentGroup").on("value", snap => {
-  group = groupArr[snap.val()];
+db.child("site").child("groups").on("child_added", snap => {
+  groupArr.push(snap.val());
 
   //run site when info is fetched
   getDate();
@@ -74,7 +73,10 @@ function getDate() {
   //standarizing months and days
 
 
-
+  // rounds hours up
+  if (minutes > 45) {
+    hours++;
+  }
   //rounds minutes
   if (minutes >= 15 && minutes <=45) {
     minutes = "30";
@@ -97,7 +99,11 @@ function displayPresets() {
 
   presetHours.innerHTML = hours+':'+minutes;
 
-  presetGroup.innerHTML = group;
+  presetGroup.innerHTML = '';
+
+  for(var i = 0; i < groupArr.length; i++) {
+    presetGroup.innerHTML += '<option value="'+groupArr[i]+'">'+groupArr[i]+'</option>';
+  }
 }
 
 
@@ -123,11 +129,14 @@ startRunning.onclick = function() {
   if (endMin < 10) {
     endMin = '0'+endMin.toString();
   }
+  if (hours < 10) {
+    hours = '0'+hours;
+  }
   let newList;
   newList = {
     dato:date+'. '+month,
     dag:day,
-    gruppe:group,
+    gruppe:presetGroup.value,
     start:hours+':'+minutes,
     slutt:endHour+':'+endMin,
     anttimer:hourInp.value

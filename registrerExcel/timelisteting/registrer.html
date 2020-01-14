@@ -9,15 +9,23 @@
     <div class="displayPreset">
       <div class="preset--date"></div>
       <div class="preset--hours"></div>
-      <div class="preset--group"></div>
+      <div class="preset--group">
+        <select class="select--group" name=""></select>
+      </div>
     </div>
 
 
     <div class="startRunning">
       <b id="statusTarget">START</b>
     </div>
-    <div class="setWorkingHours">
-      <input type="number" name="workingHours" value="3" id="hourInp">
+    <div class="select--hours--container">
+      <select class="select--hours" name="">
+        <option value="1">1 timer</option>
+        <option value="1.5">1.5 timer</option>
+        <option value="2">2 timer</option>
+        <option value="2.5">2.5 timer</option>
+        <option value="3">3 timer</option>
+      </select>
     </div>
     <div class="redirectToThisMonth">
       <a href="excelformat.html">Hent ut Timer</a>
