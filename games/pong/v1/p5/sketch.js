@@ -9,6 +9,8 @@ var keyList = {
   s:false,
   o:false,
   l:false,
+  rshft:false,
+  lshft:false,
   esc:false
 }
 
@@ -19,7 +21,7 @@ function setup() {
   ball = new Ball;
   menu = new Menu;
   online = new Online;
-  ai = new AI();
+  ai = new Ai;
 
   createCanvas(canvas.w,canvas.h);
   // put setup code here
@@ -28,7 +30,8 @@ function setup() {
   mode = 'menu';
 }
 
-function keyPressed() {
+function keyPressed(e) {
+  console.log(e.code);
   if (key == "w") {keyList.w = true}
   if (key == "s") {keyList.s = true}
   if (key == "o") {keyList.o = true}
@@ -76,12 +79,28 @@ function draw() {
 
     ball.getPos();
 
-    ai.getPos();
+
+    //check collition
+    ball.testBall();
+    // put drawing code here
+    player.show();
+    enemy.update();
+    enemy.show();
+    ball.show();
+    ball.drawScore();
+  }
+  else if (mode == 'AivsAi') {
+    ai.setDifficulty(1)
+    //update functions
+
+    ball.getPos();
 
 
     //check collition
     ball.testBall();
     // put drawing code here
+    enemy.update();
+    player.update();
     player.show();
     enemy.show();
     ball.show();
@@ -99,12 +118,11 @@ function draw() {
     menu.update();
     menu.showLobbies();
   }
+  else if (mode == 'chooseDifficultyAi') {
+    menu.update();
+    menu.showAiDifficulty();
+  }
   else if (mode == 'lobby1') {
-    if (keyList.esc == true) {
-      mode = 'pause';
-      online.subtractOnlinePlayers();
-      return;
-    }
     //get online and lan position
     if (playerId == 'player') {
       player.setDir(keyList.w,keyList.s)
@@ -132,5 +150,9 @@ function draw() {
   else if (mode == 'menu') {
     menu.update();
     menu.showMenu();
+  }
+  if (keyList.esc == true) {
+    mode = 'pause';
+    return;
   }
 }

@@ -13,9 +13,9 @@ function Ball() {
 
   this.pos = createVector(canvas.w/2,canvas.h/2);
   this.acc = createVector(0,0);
-  this.dir = 0;
+  this.dir = 1;
 
-  this.colour = clr[3];
+  this.colour = clr[1];
 
 
   this.maxSpd = canvas.w/84;
@@ -168,7 +168,8 @@ function Ball() {
     this.acc.x = constrain(this.acc.x,-this.maxSpd,this.maxSpd)
 
     this.pos.x += this.acc.x;
-    this.pos.y += this.acc.y;
+    this.pos.y += this.acc.y
+    ai.ballposy = this.pos.y;
 
     this.pos.x = constrain(this.pos.x,0+this.r,canvas.w-this.r);
     this.pos.y = constrain(this.pos.y,0+this.r,canvas.h-this.r);

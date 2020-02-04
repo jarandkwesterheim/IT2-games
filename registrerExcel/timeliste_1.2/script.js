@@ -18,8 +18,6 @@
 const db = firebase.database().ref();
 
 
-let now, date, hours, minutes, month, montInt, day, year, status, srch;
-
 
 var startRunning = document.querySelector('.startRunning');
 var statusTarget = document.querySelector('#statusTarget');
@@ -43,7 +41,7 @@ var presetGroup = document.querySelector('.select--group');
 var hourInp = document.querySelector('.select--hours');
 
 
-
+let now, date, hours, minutes, month, montInt, day, year, status, srch;
 var dayArr = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 var monthArr = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"];
 var groupArr = [];

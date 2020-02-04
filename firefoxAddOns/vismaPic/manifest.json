@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 2,
+  "name": "VismaPic",
+  "version": "1.1",
+
+  "description": "Changes profile pic for visma.com",
+
+  "icons": {
+    "48": "icons/vismapic48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.visma.no/*"],
+      "js": ["vismapic.js"]
+    }
+  ]
+
+}

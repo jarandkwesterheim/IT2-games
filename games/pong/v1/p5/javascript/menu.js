@@ -4,8 +4,7 @@ function Menu() {
   ball = new Ball;
   online = new Online;
 
-  let clientY;
-  clientY = 0;
+  let clientY = 0;
 
 
   let menuText1, menuText2, menuText3, menuText4;
@@ -31,6 +30,7 @@ function Menu() {
     var canvasMargin = (window.innerHeight-canvas.h)/2+canvas.h/20;
     clientY = e.clientY-canvasMargin;
     clientY = constrain(clientY,0,canvas.h-(canvas.h/10));
+    return clientY;
 
 
     //problem: clientY er 0 utenfor denne funksjonen
@@ -44,9 +44,7 @@ function Menu() {
 
     //singleplayerChoice clicked
     if (menuText1 == clr[0] && mode == 'singleplayerChoice') {mode = 'singleplayer'}
-    if (menuText3 == clr[0] && mode == 'singleplayerChoice') {mode = 'singleplayerAi'}
-
-
+    if (menuText3 == clr[0] && mode == 'singleplayerChoice') {mode = 'singleplayerAi';ai.setDifficulty(10)}
 
     //lobby button clicked
     if (menuText1 == clr[0] && mode == 'chooseLobbies') {mode = 'lobby1'; online.setId();}
@@ -57,7 +55,7 @@ function Menu() {
 
     //if pause clicked
     if (menuText1 == clr[0] && mode == 'pause') {mode = 'singleplayer'}
-    if (menuText3 == clr[0] && mode == 'pause') {window.location.reload(true)}
+    if (menuText3 == clr[0] && mode == 'pause') {online.subtractOnlinePlayers(); window.location.reload(true)}
 
 
   }
@@ -120,9 +118,9 @@ function Menu() {
     //draw menu
     textSize(canvas.w/17);
     fill(menuText1)
-    text('2v2',canvasPos.center,1*canvasPos.fourth);
+    text('1v1',canvasPos.center,1*canvasPos.fourth);
     fill(menuText3)
-    text('Against AI',canvasPos.center,3*canvasPos.fourth);
+    text('Against AI (Inhuman)',canvasPos.center,3*canvasPos.fourth);
   }
 
 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login Timeliste</title>
+    <link rel="stylesheet" href="../style/login.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/faaa7ab5b5.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <audio id="clickSound" src="../sound/click.mp3"></audio>
+    <div class="login--container">
+      <div class="logo-container">
+        <h1>Login</h1>
+      </div>
+      <div class="username--container">
+        <input id="emailInp" type="text" name="" placeholder="ex.ample@gmail.com" value="">
+        <div id="emailInpValidate"><i class="fas fa-times-circle"></i></div>
+      </div>
+
+
+      <div class="passcode--container">
+        <div class="passcode--display">|</div>
+        <div class="passcode">
+          <p id="1">1</p>
+          <p id="2">2</p>
+          <p id="3">3</p>
+          <p id="4">4</p>
+          <p id="5">5</p>
+          <p id="6">6</p>
+          <p id="7">7</p>
+          <p id="8">8</p>
+          <p id="9">9</p>
+          <p id="bck"><i id="bck" class="fas fa-backspace"></i></p>
+          <p id="0">0</p>
+          <p id="entr"><i id="entr" class="fas fa-sign-in-alt"></i></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+
+    <script src="../scripts/online.js" charset="utf-8"></script>
+    <script src="../scripts/login.js" charset="utf-8"></script>
+    <script src="../scripts/time.js" charset="utf-8"></script>
+    <script src="../scripts/main.js" charset="utf-8"></script>
+  </body>
+</html>

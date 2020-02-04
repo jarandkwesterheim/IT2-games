@@ -26,61 +26,62 @@ function Online() {
   player = new Player;
   enemy = new Enemy;
   ball = new Ball;
+  var activeLobby = db.child('pong').child('lobbies').child('lobby1');
   this.setId = function() {
-    db.child('pong').child('lobbies').child('lobby1').child('players').on('value', snap => {
+    activeLobby.child('players').on('value', snap => {
         if (playerId == 'empty') {
           console.log('set id');
           if (snap.val() == 0) {
             console.log(snap.val());
             playerId = 'player';
-            db.child('pong').child('lobbies').child('lobby1').child('players').set(1);
+            activeLobby.child('players').set(1);
           }
           else if (snap.val() == 1) {
             console.log(snap.val());
             playerId = 'enemy';
-            db.child('pong').child('lobbies').child('lobby1').child('players').set(2);
+            activeLobby.child('players').set(2);
           }
           else playerId = 'spec';
         }
     })
   }
   this.subtractOnlinePlayers = function() {
-    db.child('pong').child('lobbies').child('lobby1').child('players').on('value', snap => {
+    activeLobby.child('players').on('value', snap => {
       if (snap.val() == 1) {
-        db.child('pong').child('lobbies').child('lobby1').child('players').set(0);
+        activeLobby.child('players').set(0);
       }
       else if (snap.val() == 2) {
-        db.child('pong').child('lobbies').child('lobby1').child('players').set(1);
+        activeLobby.child('players').set(1);
       }
     })
   }
 
   this.setPos = function(obj) {
     if (obj == 'enemy') {
-      db.child('pong').child('lobbies').child('lobby1').child('enemy').child('x').set(enemy.pos.x)
-      db.child('pong').child('lobbies').child('lobby1').child('enemy').child('y').set(enemy.pos.y)
+      activeLobby.child('enemy').child('x').set(enemy.pos.x)
+      activeLobby.child('enemy').child('y').set(enemy.pos.y)
     }
     else if (obj == 'player') {
-      db.child('pong').child('lobbies').child('lobby1').child('player').child('x').set(player.pos.x)
-      db.child('pong').child('lobbies').child('lobby1').child('player').child('y').set(player.pos.y)
+      activeLobby.child('player').child('x').set(player.pos.x)
+      activeLobby.child('player').child('y').set(player.pos.y)
     }
     else if (obj == 'ball') {
-      db.child('pong').child('lobbies').child('lobby1').child('ball').child('x').set(ball.pos.x)
-      db.child('pong').child('lobbies').child('lobby1').child('ball').child('y').set(ball.pos.y)
+      activeLobby.child('ball').child('x').set(ball.pos.x)
+      activeLobby.child('ball').child('y').set(ball.pos.y)
     }
   }
   this.getPos = function(obj) {
     if (obj == 'enemy') {
-      db.child('pong').child('lobbies').child('lobby1').child('enemy').child('x').on('value', snap =>{enemy.pos.x = snap.val()})
-      db.child('pong').child('lobbies').child('lobby1').child('enemy').child('y').on('value', snap =>{enemy.pos.y = snap.val()})
+      activeLobby.child('enemy').child('x').on('value', snap =>{enemy.pos.x = snap.val()})
+      activeLobby.child('enemy').child('y').on('value', snap =>{enemy.pos.y = snap.val()})
     }
     else if (obj == 'player') {
-      db.child('pong').child('lobbies').child('lobby1').child('player').child('x').on('value', snap =>{player.pos.x = snap.val()})
-      db.child('pong').child('lobbies').child('lobby1').child('player').child('y').on('value', snap =>{player.pos.y = snap.val()})
+      activeLobby.child('player').child('x').on('value', snap =>{player.pos.x = snap.val()})
+      activeLobby.child('player').child('y').on('value', snap =>{player.pos.y = snap.val()})
     }
     else if (obj == 'ball') {
-      db.child('pong').child('lobbies').child('lobby1').child('ball').child('x').on('value', snap =>{ball.pos.x = snap.val()})
-      db.child('pong').child('lobbies').child('lobby1').child('ball').child('y').on('value', snap =>{ball.pos.y = snap.val()})
+      activeLobby.child('ball').child('x').on('value', snap =>{ball.pos.x = snap.val()})
+      activeLobby.child('ball').child('y').on('value', snap =>{ball.pos.y = snap.val()})
     }
   }
 }

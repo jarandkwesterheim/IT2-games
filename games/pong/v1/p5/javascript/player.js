@@ -36,6 +36,10 @@ function Player() {
     this.pos.y += this.acc.y;
     this.pos.y = constrain(this.pos.y, 0,canvas.h-this.h)
   }
+  this.update = function() {
+    this.pos.y += ai.getPos(this.pos.y)+3*ball.dir;
+    this.pos.y = constrain(this.pos.y, 0,canvas.h-this.h)
+  }
   this.show = function() {
     fill(this.color);
     rect(this.pos.x,this.pos.y,-this.w,this.h);

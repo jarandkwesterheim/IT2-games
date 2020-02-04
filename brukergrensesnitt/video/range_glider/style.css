@@ -1,0 +1,22 @@
+body{
+  margin:0;
+  padding:0;
+  left: 0;
+  top: 0;
+}
+#video {
+  position: relative;
+  width: 900px;
+}
+.nav--container{
+  height: 40px;
+}
+#glider{
+  width: 880px;
+  margin: auto 10px;
+}
+#play{
+  width: 20px;
+  height: 20px;
+  text-align: center;
+}
