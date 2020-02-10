@@ -155,7 +155,7 @@ startRunning.onclick = function() {
 //function for loading excel page
 function loadHours(dbNewRef) {
   var ref = firebase.database().ref(dbNewRef);
-  ref.on('child_added', snap => {
+  ref.on('_added', snap => {
     genHTML(snap.val());
   })
 }

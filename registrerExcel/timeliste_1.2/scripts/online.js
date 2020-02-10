@@ -33,11 +33,11 @@ function Online() {
 
 
   this.getEmail = function(email) {
-    userDb.child('users').orderByChild('email').equalTo(email).on('value', snap => {
-      if (snap.val() !== null) {
-        return true;
-      }
+    let check = false;
+    userDb.child('users').orderByChild('email').on('value', snap => {
+      console.log(snap.val());
     })
+    return check;
   }
 
 }
