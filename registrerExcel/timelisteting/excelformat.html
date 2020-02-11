@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>excel format</title>
+    <link rel="stylesheet" href="styleExcel.css">
+  </head>
+  <body>
+    <div class="choose">
+      <input type="text" name="" value="" id="srch" placeholder="2019/desember" onkeyup="srchPressed(event)">
+    </div>
+    <div class="display">
+      <table id="hourReg">
+        <tr>
+          <th>DATO</th>
+          <th>GRUPPE</th>
+          <th>START</th>
+          <th>SLUTT</th>
+          <th>ANTALL TIMER</th>
+        </tr>
+      </table>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+    <script src="script.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      loadAll();
+
+    </script>
+  </body>
+</html>

@@ -1,4 +1,19 @@
 function Login() {
+  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+  .then(function() {
+    // Existing and future Auth states are now persisted in the current
+    // session only. Closing the window would clear any existing state even
+    // if a user forgets to sign out.
+    // ...
+    // New sign-in will be persisted with session persistence.
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  })
+  .catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+
 
   //declare
   var passcodeDiv = document.querySelector('.passcode');
@@ -6,12 +21,30 @@ function Login() {
   var emailInp = document.querySelector('#emailInp');
   var emailInpValidate = document.querySelector('#emailInpValidate');
 
-
+  let emailInpValidateIcon;
   var codeArr = [];
 
 
 
   //functions
+  function checkPin() {
+    //find if email is correct
+    console.log('find email');
+    if (emailInpValidateIcon == false) {
+      //email shake animation
+      return;
+    }
+    console.log('find pin');
+    //find if code is right for email
+    let pin;
+    pin = codeArr[0];
+    for (var i = 1; i < codeArr.length; i++) {
+      pin = pin + codeArr[i];
+    }
+    online.checkPin(emailInp.value, pin.toString())
+
+  }
+
   function eventHandelerPasscode(evt) {
     var btnClicked = evt.target.id;
     if (btnClicked == '') {}
@@ -23,6 +56,7 @@ function Login() {
       codeArr.splice(-1);
     }
     else if (btnClicked == 'entr') {
+      checkPin();
     }
     updatePin();
     sound();
@@ -34,13 +68,17 @@ function Login() {
     }
   }
   function eventHandelerEmailInp() {
-    if (online.getEmail(emailInp.value)) {
+    var emailChecked = online.getEmail(emailInp.value);
+    if (emailChecked) {
       emailInpValidate.innerHTML = '<i class="fas fa-check-circle"></i>';
       document.querySelector('.fa-check-circle').style.color = 'rgb(41, 72, 232)';
+      emailInpValidateIcon = true;
     }
     else {
       emailInpValidate.innerHTML = '<i class="fas fa-times-circle"></i>';
       document.querySelector('.fa-times-circle').style.color = '#e57873';
+      emailInpValidateIcon = false;
+      setTimeout(eventHandelerEmailInp, 100);
     }
   }
 
