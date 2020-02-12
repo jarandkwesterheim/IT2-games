@@ -14,6 +14,16 @@ function Login() {
     var errorMessage = error.message;
   });
 
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      window.location.href = 'file:///Users/jarandwesterheim/Documents/IT2/registrerExcel/timeliste_1.2/html/loggedIn.html'
+    } else {
+      // No user is signed in.
+    }
+  });
+
+
 
   //declare
   var passcodeDiv = document.querySelector('.passcode');
@@ -27,22 +37,25 @@ function Login() {
 
 
   //functions
+  function loadInpEmail() {
+    emailInp.value = getCookie("email");
+  }
+  loadInpEmail();
+
+
   function checkPin() {
     //find if email is correct
-    console.log('find email');
     if (emailInpValidateIcon == false) {
       //email shake animation
       return;
     }
-    console.log('find pin');
     //find if code is right for email
-    let pin;
-    pin = codeArr[0];
-    for (var i = 1; i < codeArr.length; i++) {
+    var pin = 'pc';
+    for (var i = 0; i < codeArr.length; i++) {
       pin = pin + codeArr[i];
+      console.log(pin);
     }
     online.checkPin(emailInp.value, pin.toString())
-
   }
 
   function eventHandelerPasscode(evt) {
@@ -70,6 +83,7 @@ function Login() {
   function eventHandelerEmailInp() {
     var emailChecked = online.getEmail(emailInp.value);
     if (emailChecked) {
+      setCookie("email", emailInp.value, 7)
       emailInpValidate.innerHTML = '<i class="fas fa-check-circle"></i>';
       document.querySelector('.fa-check-circle').style.color = 'rgb(41, 72, 232)';
       emailInpValidateIcon = true;
@@ -80,6 +94,31 @@ function Login() {
       emailInpValidateIcon = false;
       setTimeout(eventHandelerEmailInp, 100);
     }
+  }
+  eventHandelerEmailInp();
+
+
+  //set and get cookies
+  function setCookie (cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+  function getCookie (cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
   //innerHTML

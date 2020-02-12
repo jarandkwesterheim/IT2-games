@@ -1,17 +1,16 @@
 function Online() {
+  const db = firebase.database().ref();
+  const userDb = db.child('userdatabase');
+
 
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
-      window.alert('logged in')
     } else {
       // No user is signed in.
-      window.alert('logged out')
     }
   });
 
-  const db = firebase.database().ref();
-  const userDb = db.child('userdatabase');
 
 
 
@@ -31,7 +30,7 @@ function Online() {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log(errorCode, errorMessage);
+      window.alert(error.message);
       //
     });
   }

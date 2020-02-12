@@ -1,0 +1,26 @@
+*{
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left: 0;
+}
+.tur-container {
+  width: 700px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+.valg, .element {
+  grid-column: span 1;
+}
+img {
+  width: 100%;
+}
+.valgBig {
+  grid-column: span 2;
+}
+
+
+.bestilling-container {
+  grid-column: span 2;
+}

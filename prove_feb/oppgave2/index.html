@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <div class="tur-container">
+      <div class="info-nordmarka element">
+        <p>Tur 1: I Nordmarka.</p>
+        <p>Pris: Voksen 500 kr, barn 250 kr.</p>
+        <img src="../extra/nordmarkaNy.jpg" alt="">
+      </div>
+      <div class="info-fjellet element">
+        <p>Tur 2: På fjellet.</p>
+        <p>Pris: Voksen 700 kr, barn 350 kr.</p>
+        <img src="../extra/fjellturNy.jpg" alt="">
+      </div>
+
+
+      <div class="valgBig">
+        <form class="turChoice">
+          <input type="radio" name="tur" value="1"> I Nordmarka <br>
+          <input type="radio" name="tur" value="2"> På fjellet <br>
+        </form>
+      </div>
+
+      <div class="valg">
+        <span>Antall Voksne: </span>
+        <select class="antVoksne" name="">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div class="valg">
+        <select class="guide" name="">
+          <option value="0">Velg Guide</option>
+          <option value="1">Severin Suveren</option>
+        </select>
+      </div>
+      <div class="valg">
+        <span>Antall Barn: </span>
+        <select class="antBarn" name="">
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
+      <div class="valg">
+        <button id="bestillingBtn" type="button" name="button">Bestill Tur</button>
+      </div>
+
+
+
+      <div class="bestilling-container">
+        <h1>Din bestilling:</h1>
+        <div class="bestilling">
+        </div>
+      </div>
+    </div>
+
+
+
+    <script src="script.js" charset="utf-8"></script>
+
+  </body>
+</html>
