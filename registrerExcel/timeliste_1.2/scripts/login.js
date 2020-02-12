@@ -17,7 +17,7 @@ function Login() {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       // User is signed in.
-      window.location.href = 'file:///Users/jarandwesterheim/Documents/IT2/registrerExcel/timeliste_1.2/html/loggedIn.html'
+      window.location.href = 'https://jarandkwesterheim.github.io/registrerExcel/timeliste_1.2/html/loggedIn.html'
     } else {
       // No user is signed in.
     }
