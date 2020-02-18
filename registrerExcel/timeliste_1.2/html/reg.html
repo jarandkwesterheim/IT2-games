@@ -3,12 +3,86 @@
   <head>
     <meta charset="utf-8">
     <title>logged in</title>
+    <link rel="stylesheet" href="../style/master.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/faaa7ab5b5.js" crossorigin="anonymous"></script>
   </head>
+  <header>
+    <nav>
+      <div class="nav--link table">
+        <div class="nav--btn">table</div>
+      </div>
+      <div class="nav--link">
+        <div class="nav--btn signOut">sign out</div>
+      </div>
+    </nav>
+  </header>
   <body>
+    <div class="main--container">
+      <div class="main--date">
+        <div class="date--icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <div class="date--display">
+          14. Februar 2020
+        </div>
+      </div>
+      <div class="main--group">
+        <select class="group--select" name="group">
+          <option value="1">Group1</option>
+          <option value="2">Group2</option>
+          <option value="3">Group3</option>
+        </select>
+      </div>
+      <div class="main--startTime">
+        <select class="startTime--select" name="">
+          <option value="1">18:00</option>
+          <option value="2" selected>18:30</option>
+          <option value="3">19:00</option>
+        </select>
+      </div>
+      <div class="main--gliderContainer">
+        <div class="glider--display"></div>
+        <input class="glider--range" type="range" name="hourRange" value="75">
+      </div>
 
-    <p onclick="logOut()">log out</p>
-    <br>
-    <p onclick="checkLogin()">check login</p>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->

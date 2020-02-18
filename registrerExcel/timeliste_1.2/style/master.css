@@ -1,0 +1,46 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nanum Gothic', sans-serif;
+  text-transform: uppercase;
+}
+header{
+  top: 0;
+  height: 10vh;
+  background-color: white;
+  box-shadow: 0px 10px 5px 0px rgba(144, 141, 141, 1);
+}
+nav{
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+.nav--link{
+  margin: auto 0;
+  position: relative;
+  font-size: 3em;
+}
+.nav--btn{
+  margin: auto;
+  padding: 2vh;
+  width: 22vh;
+  border: 3px solid rgb(1, 137, 224);
+  border-radius: 10vh;
+}
+.signOut{
+  background-color: rgb(6, 89, 142);
+  color: white;
+}
+
+body{
+  background-color: white;
+}
+.main--container{
+  font-size: 4em;
+}
+.main--date{
+  display: flex;
+  justify-content: center;
+}

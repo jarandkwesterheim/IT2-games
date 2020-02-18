@@ -30,6 +30,7 @@ function Login() {
   var passcodeDisplay = document.querySelector('.passcode--display');
   var emailInp = document.querySelector('#emailInp');
   var emailInpValidate = document.querySelector('#emailInpValidate');
+  var backgroundContainer = document.querySelector('.backgroundContainer');
 
   let emailInpValidateIcon;
   var codeArr = [];
@@ -130,7 +131,6 @@ function Login() {
   }
 
   //animations
-
   //sound
   function sound() {
     var click = document.querySelector('#clickSound');
