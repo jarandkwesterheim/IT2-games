@@ -38,9 +38,31 @@ body{
   background-color: white;
 }
 .main--container{
+  padding: 0 10%;
   font-size: 4em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
 }
 .main--date{
   display: flex;
   justify-content: center;
+  grid-column: span 2;
+  margin-top: 30%;
+}
+.main--group, .main--startTime{
+  margin-top: 20%;
+  grid-column: span 1;
+}
+.group--select, .startTime--select {
+  transform: scale(3);
+}
+.group--select>option{
+}
+.main--gliderContainer{
+  grid-column: span 2;
+  margin-top: 20%;
+}
+.glider--range{
+  transform: scale(3);
 }
