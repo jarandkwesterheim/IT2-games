@@ -15,7 +15,9 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
-const db = firebase.database().ref();
+const db = firebase.database().ref().child('w36QRSrROHUs13joC3DuuFUzsLv1');
+
+let now, date, hours, minutes, month, montInt, day, year,status, srch;
 
 
 
@@ -41,14 +43,14 @@ var presetGroup = document.querySelector('.select--group');
 var hourInp = document.querySelector('.select--hours');
 
 
-let now, date, hours, minutes, month, montInt, day, year, status, srch;
+
 var dayArr = ["Mandag", "Tirsdag", "Onsdag", "Torsdag", "Fredag", "Lørdag", "Søndag"];
 var monthArr = ["Januar", "Februar", "Mars", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Desember"];
 var groupArr = [];
 
 
 
-db.child("site").child("groups").on("child_added", snap => {
+db.child("users").child("groups").on("child_added", snap => {
   groupArr.push(snap.val());
 
   //run site when info is fetched
@@ -154,8 +156,8 @@ startRunning.onclick = function() {
 
 //function for loading excel page
 function loadHours(dbNewRef) {
-  var ref = firebase.database().ref(dbNewRef);
-  ref.on('_added', snap => {
+  var ref = firebase.database().ref('w36QRSrROHUs13joC3DuuFUzsLv1/'+dbNewRef);
+  ref.on('child_added', snap => {
     genHTML(snap.val());
   })
 }
