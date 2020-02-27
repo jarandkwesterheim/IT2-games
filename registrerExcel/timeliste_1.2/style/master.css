@@ -5,6 +5,10 @@
   font-family: 'Nanum Gothic', sans-serif;
   text-transform: uppercase;
 }
+a{
+  color: black;
+  text-decoration: none;
+}
 header{
   top: 0;
   height: auto;
@@ -54,11 +58,58 @@ body{
 .main--group, .main--startTime{
   margin-top: 20%;
   grid-column: span 1;
+  padding-bottom: 40%;
 }
-.group--select, .startTime--select {
-  transform: scale(3);
+.select-header{
+  font-size: 0.7em;
 }
-.group--select>option{
+.select-container{
+  position: relative;
+}
+.option-container{
+  left: 5%;
+  top: -20%;
+  visibility: hidden;
+  position: absolute;
+}
+.select-container>div{
+  width: 90%;
+  margin: auto;
+}
+.select-display{
+  z-index: 2;
+  background-color: white;
+}
+.select-display, .option {
+  padding: 10px 0;
+  font-size: 0.8em;
+  border-right: 2px;
+  border-left: 2px;
+  border-bottom: 2px;
+  border-color: rgb(144, 144, 144);
+  border-style: solid;
+  border-radius: 0.2vw;
+}
+.option{
+  border-top: 0;
+  color: rgb(144, 144, 144);
+  position: relative;
+  font-size: 0.5em;
+}
+.fa-plus-square{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 13%;
+}
+.option-bottom{
+  border-radius: 0px 0px 1vw 1vw;
+}
+.option-special{
+  background-color: rgb(144, 144, 144);
+  color: white;
+  border-color: rgb(144, 144, 144);
+  font-size: 0.8em;
 }
 .main--gliderContainer{
   grid-column: span 2;

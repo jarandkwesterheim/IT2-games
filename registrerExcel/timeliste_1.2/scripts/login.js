@@ -14,15 +14,6 @@ function Login() {
     var errorMessage = error.message;
   });
 
-  firebase.auth().onAuthStateChanged(function(user) {
-    if (user) {
-      // User is signed in.
-      window.location.href = 'https://jarandkwesterheim.github.io/registrerExcel/timeliste_1.2/html/loggedIn.html'
-    } else {
-      // No user is signed in.
-    }
-  });
-
 
 
   //declare
@@ -71,6 +62,14 @@ function Login() {
     }
     else if (btnClicked == 'entr') {
       checkPin();
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // User is signed in.
+          window.location.href = '../html/reg.html'
+        } else {
+          // No user is signed in.
+        }
+      });
     }
     updatePin();
     sound();
@@ -82,6 +81,7 @@ function Login() {
     }
   }
   function eventHandelerEmailInp() {
+
     var emailChecked = online.getEmail(emailInp.value);
     if (emailChecked) {
       setCookie("email", emailInp.value, 7)

@@ -15,7 +15,8 @@
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
-const db = firebase.database().ref().child('w36QRSrROHUs13joC3DuuFUzsLv1');
+const uid = 'AAsNeY9wmnXtV0yIe4hFll1WDA03';
+const db = firebase.database().ref().child('AAsNeY9wmnXtV0yIe4hFll1WDA03');
 
 let now, date, hours, minutes, month, montInt, day, year,status, srch;
 
@@ -156,8 +157,9 @@ startRunning.onclick = function() {
 
 //function for loading excel page
 function loadHours(dbNewRef) {
-  var ref = firebase.database().ref('w36QRSrROHUs13joC3DuuFUzsLv1/'+dbNewRef);
+  var ref = firebase.database().ref(uid+'/'+dbNewRef);
   ref.on('child_added', snap => {
+    console.log('added');
     genHTML(snap.val());
   })
 }

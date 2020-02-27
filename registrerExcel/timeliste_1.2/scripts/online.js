@@ -1,6 +1,7 @@
 function Online() {
-  const db = firebase.database().ref();
-  const userDb = db.child('userdatabase');
+  const uid = 'AAsNeY9wmnXtV0yIe4hFll1WDA03';
+  const db = firebase.database().ref(uid);
+  const userDb = firebase.database().ref('userdatabase');
 
 
   firebase.auth().onAuthStateChanged(function(user) {
@@ -36,9 +37,12 @@ function Online() {
   }
   this.getEmail = function(email) {
     let check = false;
-    userDb.child('users').orderByChild('email').equalTo(email).on('value', snap => {
-      if (snap.val() !== null) {
-        check = true;
+    userDb.child('users').child('emails').on('value', snap => {
+      var arr = snap.val();
+      for(var item in arr) {
+        if (email == arr[item]) {
+          check = true;
+        }
       }
     })
     return check;
