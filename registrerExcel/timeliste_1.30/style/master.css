@@ -104,6 +104,9 @@ body{
   top: 50%;
   left: 13%;
 }
+.fa-calendar-alt{
+  margin-right: 1vw;
+}
 .option-bottom{
   border-radius: 0px 0px 1vw 1vw;
 }
@@ -119,4 +122,36 @@ body{
 }
 .glider--range{
   transform: scale(3);
+}
+
+
+/*animation*/
+.slide-out-top {
+	-webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+	        animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+@-webkit-keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+  }
+}
+@keyframes slide-out-top {
+  0% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+  }
 }

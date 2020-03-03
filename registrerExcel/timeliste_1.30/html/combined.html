@@ -6,6 +6,7 @@
     <title>Login Timeliste</title>
     <link rel="stylesheet" href="../style/login.css">
     <link rel="stylesheet" href="../style/master.css">
+    <link rel="stylesheet" href="../style/glider.css">
     <script src="https://kit.fontawesome.com/faaa7ab5b5.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/faaa7ab5b5.js" crossorigin="anonymous"></script>
@@ -31,7 +32,7 @@
           <i class="far fa-calendar-alt"></i>
         </div>
         <div class="date--display">
-          14. Februar 2020
+          1. Januar 2001
         </div>
       </div>
       <div class="main--group">
@@ -45,17 +46,14 @@
       <div class="main--startTime">
         <div class="select-container">
           <div class="select-header">Starttime:</div>
-          <div class="select-display" id="select-container-time">18:30</div>
+          <div class="select-display" id="select-container-time">12:00</div>
           <div class="option-container" id="option-container-time">
-            <div value="18:00" class="option">18:00</div>
-            <div value="18:30" class="option">18:30</div>
-            <div value="19:00" class="option option-bottom">19:00</div>
           </div>
         </div>
       </div>
       <div class="main--gliderContainer">
-        <div class="glider--display"></div>
-        <input class="glider--range" type="range" name="hourRange" value="75">
+        <div class="glider--display">3 hours</div>
+        <input class="glider--range" type="range" name="hourRange" max="15" value="5">
       </div>
 
     </div>

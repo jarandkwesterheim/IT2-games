@@ -37,5 +37,19 @@ function Time() {
     //converts dayInt to day
     day = dayArr[day];
 
+
+
+    timeObj = {
+      year:year,
+      month:month,
+      date:date,
+      day:day,
+      hours:hours,
+      minutes:minutes
+    }
+
+
+    return timeObj;
+
   }
 }

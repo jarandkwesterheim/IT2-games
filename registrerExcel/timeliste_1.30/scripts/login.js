@@ -64,9 +64,15 @@ function Login() {
       firebase.auth().onAuthStateChanged(function(user) {
         if (user) {
           // User is signed in
-          loginCont.animate([{top:0},{top:'-100%'}],{duration:200,fill:'forwards'})
+          loginCont.classList.add('slide-out-top');
           document.body.style.overflow = 'visible';
+
+
+
+
+
           fillGroup();
+          fillTime();
 
         } else {
           // No user is signed in.
