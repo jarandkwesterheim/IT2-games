@@ -65,6 +65,7 @@ function Login() {
         if (user) {
           // User is signed in
           loginCont.classList.add('slide-out-top');
+          loginCont.style.visibility = 'hidden';
           document.body.style.overflow = 'visible';
 
 
