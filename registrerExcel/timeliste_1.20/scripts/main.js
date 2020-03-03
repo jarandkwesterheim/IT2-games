@@ -1,8 +1,6 @@
 let time, online;
-
 time = new Time;
 online = new Online;
-
 
 function checkLogin() {
   var user = firebase.auth().currentUser;

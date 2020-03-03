@@ -1,0 +1,122 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nanum Gothic', sans-serif;
+}
+a{
+  color: black;
+  text-decoration: none;
+}
+header{
+  text-transform: uppercase;
+  top: 0;
+  height: auto;
+  background-color: white;
+  padding: 40px 0;
+  box-shadow: 0px 10px 5px 0px rgba(144, 141, 141, 1);
+}
+nav{
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+}
+.nav--link{
+  margin: auto 0;
+  position: relative;
+  font-size: 3em;
+}
+.nav--btn{
+  margin: auto;
+  width: 80%;
+  padding: 40px 20px;
+  border: 3px solid rgb(1, 137, 224);
+  border-radius: 10vh;
+}
+.signOut{
+  background-color: rgb(6, 89, 142);
+  color: white;
+}
+
+body{
+  background-color: white;
+  overflow: hidden;
+}
+.main--container{
+  text-transform: uppercase;
+  padding: 0 10%;
+  font-size: 4em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  text-align: center;
+}
+.main--date{
+  display: flex;
+  justify-content: center;
+  grid-column: span 2;
+  margin-top: 30%;
+}
+.main--group, .main--startTime{
+  margin-top: 20%;
+  grid-column: span 1;
+  padding-bottom: 40%;
+}
+.select-header{
+  font-size: 0.7em;
+}
+.select-container{
+  position: relative;
+}
+.option-container{
+  left: 5%;
+  top: -20%;
+  visibility: hidden;
+  position: absolute;
+}
+.select-container>div{
+  width: 90%;
+  margin: auto;
+}
+.select-display{
+  z-index: 2;
+  background-color: white;
+}
+.select-display, .option {
+  padding: 10px 0;
+  font-size: 0.8em;
+  border-right: 2px;
+  border-left: 2px;
+  border-bottom: 2px;
+  border-color: rgb(144, 144, 144);
+  border-style: solid;
+  border-radius: 0.2vw;
+}
+.option{
+  border-top: 0;
+  color: rgb(144, 144, 144);
+  position: relative;
+  font-size: 0.5em;
+}
+.fa-plus-square{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 13%;
+}
+.option-bottom{
+  border-radius: 0px 0px 1vw 1vw;
+}
+.option-special{
+  background-color: rgb(144, 144, 144);
+  color: white;
+  border-color: rgb(144, 144, 144);
+  font-size: 0.8em;
+}
+.main--gliderContainer{
+  grid-column: span 2;
+  margin-top: 20%;
+}
+.glider--range{
+  transform: scale(3);
+}

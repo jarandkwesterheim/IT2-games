@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="user-scalable=no">
+    <title>Login Timeliste</title>
+    <link rel="stylesheet" href="../style/login.css">
+    <link rel="stylesheet" href="../style/master.css">
+    <script src="https://kit.fontawesome.com/faaa7ab5b5.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Nanum+Gothic&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/faaa7ab5b5.js" crossorigin="anonymous"></script>
+  </head>
+  <header>
+    <nav>
+      <div class="nav--link table">
+        <a href="excel/excelformat.html">
+          <div class="nav--btn">table</div>
+        </a>
+      </div>
+      <div class="nav--link">
+        <a href="">
+          <div class="nav--btn signOut">sign out</div>
+        </a>
+      </div>
+    </nav>
+  </header>
+  <body>
+    <div class="main--container">
+      <div class="main--date">
+        <div class="date--icon">
+          <i class="far fa-calendar-alt"></i>
+        </div>
+        <div class="date--display">
+          14. Februar 2020
+        </div>
+      </div>
+      <div class="main--group">
+        <div class="select-container">
+          <div class="select-header">Group:</div>
+          <div class="select-display" id="select-container-group">choose group</div>
+          <div class="option-container" id="option-container-group">
+          </div>
+        </div>
+      </div>
+      <div class="main--startTime">
+        <div class="select-container">
+          <div class="select-header">Starttime:</div>
+          <div class="select-display" id="select-container-time">18:30</div>
+          <div class="option-container" id="option-container-time">
+            <div value="18:00" class="option">18:00</div>
+            <div value="18:30" class="option">18:30</div>
+            <div value="19:00" class="option option-bottom">19:00</div>
+          </div>
+        </div>
+      </div>
+      <div class="main--gliderContainer">
+        <div class="glider--display"></div>
+        <input class="glider--range" type="range" name="hourRange" value="75">
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div class="backgroundContainer">
+      <audio id="clickSound" src="../sound/click.mp3"></audio>
+      <div class="login--container">
+        <div class="logo-container">
+          <h1>Login</h1>
+        </div>
+        <div class="username--container">
+          <input id="emailInp" type="text" name="" placeholder="ex.ample@gmail.com" value="">
+          <div id="emailInpValidate"><i class="fas fa-times-circle"></i></div>
+        </div>
+
+
+        <div class="passcode--container">
+          <div class="passcode--display">|</div>
+          <div class="passcode">
+            <p id="1">1</p>
+            <p id="2">2</p>
+            <p id="3">3</p>
+            <p id="4">4</p>
+            <p id="5">5</p>
+            <p id="6">6</p>
+            <p id="7">7</p>
+            <p id="8">8</p>
+            <p id="9">9</p>
+            <p id="bck"><i id="bck" class="fas fa-backspace"></i></p>
+            <p id="0">0</p>
+            <p id="entr"><i id="entr" class="fas fa-sign-in-alt"></i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.8.1/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCeLEU-XFLPv_2s4CBvgt8-oGipeJtNv3s",
+        authDomain: "registrerexcel.firebaseapp.com",
+        databaseURL: "https://registrerexcel.firebaseio.com",
+        projectId: "registrerexcel",
+        storageBucket: "registrerexcel.appspot.com",
+        messagingSenderId: "617832437723",
+        appId: "1:617832437723:web:7de229c6cb864e7217f9fe",
+        measurementId: "G-P3PSTCYYWE"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+
+    <script src="../scripts/time.js" charset="utf-8"></script>
+    <script src="../scripts/online.js" charset="utf-8"></script>
+    <script src="../scripts/login.js" charset="utf-8"></script>
+    <script src="../scripts/main.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      //scroll to top
+      window.scrollTo(0,0);
+      let time, online, login;
+
+      time = new Time;
+      online = new Online;
+      login = new Login;
+    </script>
+  </body>
+</html>

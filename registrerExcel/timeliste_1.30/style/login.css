@@ -1,0 +1,125 @@
+*{
+  padding: 0;
+  margin: 0;
+  left: 0;
+  top: 0;
+}
+body{
+  background-color: #181d20;
+}
+.backgroundContainer{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-image: url('https://i.pinimg.com/originals/cf/71/af/cf71af6a049f215f2f240e5902841984.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.login--container{
+  position: relative;
+  font-family: 'Nanum Gothic', sans-serif;
+  color: white;
+  font-size: 3vh;
+  width: 100%;
+    max-width: 70vh;
+  height: 100vh;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.logo-container{
+  padding-top: 10%;
+  grid-row: span 1;
+}
+
+.username--container{
+  width: 67%;
+  margin: auto;
+  margin-bottom: 5%;
+  margin-top: 10%;
+  position: relative;
+  grid-row: span 1;
+}
+#emailInp{
+  position: absolute;
+  font-size: 2vh;
+  color: white;
+  background-color: rgba(156, 155, 162, 0.5);
+  border: none;
+  width: 80%;
+  height: 75%;
+  text-align: center;
+  display: inline-block;
+}
+#emailInpValidate{
+  position: absolute;
+  left:80%;
+  height: 75%;
+  width: 20%;
+  background-color: rgba(156, 155, 162, 0.5);
+  display: inline-block;
+}
+#emailInpValidate>i{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  color: #e57873;
+}
+
+.passcode--container{
+  position: relative;
+  grid-row: span 3;
+
+}
+.passcode--display{
+  padding: 2% 10%;
+  width: 40%;
+  height: 10%;
+  margin: auto;
+  margin-bottom: 11%;
+  border-bottom: 1px solid white;
+  animation: idleLogin 0.9s infinite;
+}
+.passcode{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-row-gap: 7%;
+  height: 60%;
+  width: 80%;
+  margin: auto;
+}
+.passcode>p{
+}
+.fa-sign-in-alt{
+  background-color: rgb(41, 72, 232);
+  border-radius: 50%;
+  padding: 7%;
+}
+.fa-backspace {
+  padding: 7%;
+}
+
+
+/*animations*/
+@keyframes idleLogin {
+  0% {color:white;}
+  40% {color:white;}
+  50% {color: rgba(93, 207, 109, 0);}
+  90% {color: rgba(93, 207, 109, 0);}
+  100% {color:white;}
+}
+
+@keyframes touchAnimation {
+  0% {background: rgb(183, 191, 184)}
+  99% {background: rgb(183, 191, 184)}
+  100% {background: inherit}
+}
