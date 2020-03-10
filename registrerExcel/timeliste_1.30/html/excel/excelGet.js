@@ -170,11 +170,11 @@ function genHTML(snap) {
   var hourReg = document.querySelector('#hourReg');
   hourReg.innerHTML += `
   <tr>
-    <td>${snap.dato}</td>
-    <td>${snap.gruppe}</td>
+    <td>${snap.date}</td>
+    <td>${snap.group}</td>
     <td>${snap.start}</td>
-    <td>${snap.slutt}</td>
-    <td>${snap.anttimer}</td>
+    <td>${snap.end}</td>
+    <td>${snap.hourcount}</td>
   </tr>
   `
 }

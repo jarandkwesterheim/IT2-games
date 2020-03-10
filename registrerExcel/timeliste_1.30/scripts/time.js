@@ -52,4 +52,22 @@ function Time() {
     return timeObj;
 
   }
+  this.getDateCode = function() {
+    let day, month, year;
+    day = date.toString();
+    month = monthInt.toString();
+    year = (year-2000).toString();
+    if (day.length > 2) {
+      day = '0'+day;
+    }
+    if (month.length > 2) {
+      month = '0'+day;
+    }
+    if (year.length > 2) {
+      year = '0'+day;
+    }
+
+    return day+month+year
+
+  }
 }

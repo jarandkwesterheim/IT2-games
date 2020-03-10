@@ -141,21 +141,56 @@ function fillTime() {
   timeCont.innerHTML = '<div value="'+time1+'" class="option">'+time1+'</div>';
   timeCont.innerHTML += '<div value="'+time2+'" class="option">'+time2+'</div>';
   timeCont.innerHTML += '<div value="'+time3+'" class="option option-bottom">'+time3+'</div>';
+  startToBePushed = time2;
 
 }
 gliderRange.onchange = function() {
   var gliderVal = gliderRange.value/2+0.5;
   gliderDisplay.innerHTML = gliderVal +' hours'
   hoursToBePushed = gliderVal;
+}
 
-  console.log(startToBePushed);
+
+function push() {
+  let newList;
+
+  //push anttimer og endHour
+  var gliderVal = gliderRange.value/2+0.5;
   var timeConv = startToBePushed.split(':');
-  console.log(timeConv);
+  let endHour, endMin;
 
-
-  if (gliderVal%1 == 0) {
-
+  if (gliderVal%1 == 0.5) {
+    gliderVal = Number(gliderVal) - 0.5;
+    endHour = Number(timeConv[0]) + gliderVal;
+    endMin = ':30';
   }
+  else {
+    endHour = String(Number(timeConv[0])+gliderVal);
+    endMin = ':00';
+  }
+  endToBePushed = endHour + endMin;
+
+
+
+  //done product
+  newList = {
+    date:time.getDate().date+'. '+time.getDate().month,
+    day:time.getDate().day,
+    group:groupToBePushed,
+    start:startToBePushed,
+    end:endToBePushed,
+    hourcount:(gliderRange.value/2+0.5)
+  }
+  for (var item in newList) {
+    if(newList.hasOwnProperty(item)) {
+        var value = newList[item];
+        if (value == undefined) {
+          alert(item +' is undefined')
+        }
+    }
+  }
+  console.log(newList);
+  online.pushTime(newList);
 }
 //redirect to table
 
