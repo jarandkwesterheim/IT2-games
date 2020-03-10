@@ -1,5 +1,4 @@
 function Online() {
-  //AAsNeY9wmnXtV0yIe4hFll1WDA03
   var uid = '';
   const db = firebase.database().ref();
   var userDb = firebase.database().ref('userdatabase');

@@ -144,7 +144,7 @@ function fillTime() {
   startToBePushed = time2;
 
 }
-gliderRange.onchange = function() {
+gliderRange.oninput = function() {
   var gliderVal = gliderRange.value/2+0.5;
   gliderDisplay.innerHTML = gliderVal +' hours'
   hoursToBePushed = gliderVal;

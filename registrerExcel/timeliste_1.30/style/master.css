@@ -125,6 +125,13 @@ body{
 }
 
 
+.main--pushContainer{
+  grid-column: span 2;
+  margin-top: 20%;
+  width: 100%;
+}
+
+
 /*animation*/
 .slide-out-top {
 	-webkit-animation: slide-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
@@ -154,7 +161,4 @@ body{
             transform: translateY(-150%);
     opacity: 0;
   }
-}
-.nav--link:hover {
-  cursor: pointer;
 }
