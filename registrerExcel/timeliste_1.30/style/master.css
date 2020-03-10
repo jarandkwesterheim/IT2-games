@@ -138,8 +138,8 @@ body{
     opacity: 1;
   }
   100% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
+    -webkit-transform: translateY(-150%);
+            transform: translateY(-150%);
     opacity: 0;
   }
 }
@@ -150,8 +150,11 @@ body{
     opacity: 1;
   }
   100% {
-    -webkit-transform: translateY(-1000px);
-            transform: translateY(-1000px);
+    -webkit-transform: translateY(-150%);
+            transform: translateY(-150%);
     opacity: 0;
   }
+}
+.nav--link:hover {
+  cursor: pointer;
 }

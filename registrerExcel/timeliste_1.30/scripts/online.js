@@ -47,4 +47,8 @@ function Online() {
     return arr;
   }
 
+  this.getUrl = function() {
+    return 'https://jarandkwesterheim.github.io/registrerExcel/timeliste_1.30/html/excel/excelformat.html?id='+uid;
+  }
+
 }

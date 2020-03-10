@@ -62,9 +62,10 @@ var timeCont = document.querySelector('#option-container-time');
 var gliderRange = document.querySelector('.glider--range');
 var gliderDisplay = document.querySelector('.glider--display');
 
+var redirect = document.querySelector('#redirect');
+
 let groupArr;
 let yearToBePushed, monthToBePushed, hoursToBePushed, dayToBePushed, dateToBePushed, groupToBePushed, endToBePushed, startToBePushed;
-
 
 groupDisplay.onclick = function() {
   fillGroup();
@@ -106,6 +107,8 @@ function fillGroup() {
   groupCont.innerHTML += '<div value="Create" class="option option-bottom option-special"><i class="far fa-plus-square"></i>Create</div>';
 }
 function fillTime() {
+  //define time if not to be changed
+  startToBePushed = time.getDate().hours;
   //date display
   var dateObj = time.getDate();
   dateDisplay.innerHTML = ' '+dateObj.date +'. '+ dateObj.month +' '+dateObj.year;
@@ -144,7 +147,19 @@ gliderRange.onchange = function() {
   var gliderVal = gliderRange.value/2+0.5;
   gliderDisplay.innerHTML = gliderVal +' hours'
   hoursToBePushed = gliderVal;
+
+  console.log(startToBePushed);
+  var timeConv = startToBePushed.split(':');
+  console.log(timeConv);
+
+
   if (gliderVal%1 == 0) {
-    en
+
   }
+}
+//redirect to table
+
+redirect.onclick = function() {
+  var url = online.getUrl();
+  window.location.assign(url)
 }
