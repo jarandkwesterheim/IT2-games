@@ -131,6 +131,10 @@ body{
   width: 100%;
 }
 
+#pushBtn{
+  transition: 1s ease;
+}
+
 
 /*animation*/
 .slide-out-top {

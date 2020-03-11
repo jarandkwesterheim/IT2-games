@@ -181,16 +181,21 @@ function push() {
     end:endToBePushed,
     hourcount:(gliderRange.value/2+0.5)
   }
+  var ready = true;
+  var pushBtn = document.querySelector('#pushBtn');
   for (var item in newList) {
     if(newList.hasOwnProperty(item)) {
         var value = newList[item];
         if (value == undefined) {
+          ready = false;
           alert(item +' is undefined')
         }
     }
   }
-  console.log(newList);
-  online.pushTime(newList);
+  if (ready == true) {
+    online.pushTime(newList);
+    pushBtn.animate([{borderColor:'rgb(1, 137, 224)'},{borderColor:'rgb(244, 93, 78)'}],{duration:1000, animationFillMode: 'forwards'})
+  }
 }
 //redirect to table
 
