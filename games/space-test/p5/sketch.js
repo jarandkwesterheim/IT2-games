@@ -5,8 +5,8 @@ function preload(){
 //variables
   //STARS
 var starArr = [];
-  //SUN
-let sunr, sunc, sunpos, sunvel;
+  //OBJECTS
+let sun, earth;
 
 
 function setup() {
@@ -14,7 +14,7 @@ function setup() {
   // put setup code here
   noStroke();
   generateStars();
-  generateSun();
+  generateObjects();
 }
 
 function draw() {
@@ -32,15 +32,17 @@ function draw() {
   updateSun();
   drawSun();
 
+    //earth
+  updateEarth();
+  drawEarth();
+
 }
-
-
 
 //GRAVITY
 function gravity(m1,m2,r) {
+  var γ = (6.67408e-11);
   let f;
-  var γ = (6.67408*10^-11);
-  f = (γ*m1*m2)/(r^2);
+  f = (γ*m1*m2)/(Math.pow(r,2));
   return f;
 }
 
@@ -55,8 +57,8 @@ function generateStars() {
   //randomize position
   for (var i = 0; i < starCount; i++) {
     //randomize x position
-    starX = Math.floor(Math.random()*(canvas.width))+1-canvas.width/4; //generates stars 2x size of screen, positions in middle for futher movement around
-    starY = Math.floor(Math.random()*(canvas.height))+1-canvas.height/4; //--||--
+    starX = Math.floor(Math.random()*(canvas.width))+1; //generates stars 2x size of screen, positions in middle for futher movement around
+    starY = Math.floor(Math.random()*(canvas.height))+1; //--||--
     starS = Math.floor(Math.random()*(starSizeMax-starSizeMin))+1+starSizeMin;
 
     //put in array
@@ -72,16 +74,67 @@ function drawStars() {
   }
 }
 
-//SUN
-function generateSun() {
-  sunr = 60;
-  sunc = "rgb(236, 240, 56)";
-  sunpos = {x:canvas.width/4,y:canvas.height/4};
+//OBJECTS
+function generateObjects() {
+  sun = {
+    pos:{
+      x:canvas.width/2,
+      y:canvas.height/2
+    },
+    vel:{
+      x:0,
+      y:0
+    },
+    radius:60,
+    color:"rgb(236, 240, 56)",
+    mass:1.989e30
+  };
+  earth = {
+    pos:{
+      x:canvas.width/4,
+      y:canvas.height/2
+    },
+    vel:{
+      x:0,
+      y:0
+    },
+    radius:20,
+    color:"rgb(56, 141, 240)",
+    mass:5.972e24
+  }
 }
+
+//SUN
 function updateSun() {
 
 }
 function drawSun() {
-  fill(sunc);
-  circle(sunpos.x,sunpos.y,sunr);
+  fill(sun.color);
+  circle(sun.pos.x,sun.pos.y,sun.radius);
+}
+
+//EARTH
+function updateEarth() {
+  var distx = earth.pos.x-sun.pos.x;
+  var disty = earth.pos.y-sun.pos.y;
+  distx = Math.sqrt(distx*distx);
+  disty = Math.sqrt(disty*disty);
+  var dist = Math.sqrt(Math.pow(distx)+Math.pow(disty));
+  var gravForceEarth = gravity(earth.mass,sun.mass,dist); //size of force
+
+
+
+  //acc
+  earth.vel.x += Number(gravForceEarth)/Number(earth.mass);
+
+
+
+
+  //movement
+  earth.pos.x += earth.vel.x;
+  earth.pos.y += earth.vel.y;
+}
+function drawEarth() {
+  fill(earth.color);
+  circle(earth.pos.x,earth.pos.y,earth.radius);
 }
