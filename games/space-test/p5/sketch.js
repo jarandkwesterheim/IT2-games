@@ -103,17 +103,15 @@ function drawSun() {
 
 //EARTH
 function updateEarth() {
-  var distx = earth.pos.x-sun.pos.x;
-  var disty = earth.pos.y-sun.pos.y;
-  distx = Math.sqrt(distx*distx);
-  disty = Math.sqrt(disty*disty);
-  var dist = Math.sqrt(Math.pow(distx)+Math.pow(disty));
+  var distx = Number(earth.pos.x-sun.pos.x);
+  var disty = Number(earth.pos.y-sun.pos.y);
+  var dist = Math.hypot(distx,disty);
   var gravForceEarth = gravity(earth.mass,sun.mass,dist); //size of force
 
 
 
   //acc
-
+  earth.vel.x += gravForceEarth/earth.mass*0.00000000000000001;
 
 
 
