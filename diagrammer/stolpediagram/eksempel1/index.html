@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>eksempel 1</title>
+    <style media="screen">
+      #chart>div{
+        height:15px;
+        margin-bottom:5px;
+        background-color:DarkOrange;
+        color:white;
+        padding:5px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Temperaturer på Sicilia</p>
+    <div id=chart></div>
+    <script type="text/javascript">
+      var chart = document.getElementById("chart");
+      var temperaturer = [16,16,18,21,25,30,33,33,30,25,20,17];
+
+      for(var temp of temperaturer){
+        chart.innerHTML += '<div style="width:'+temp*10+'px">'+temp+'</div>';
+      }
+
+    </script>
+  </body>
+</html>

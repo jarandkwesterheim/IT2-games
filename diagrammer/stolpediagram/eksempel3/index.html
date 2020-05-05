@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>eksempel 3</title>
+    <style media="screen">
+      #chart {
+        display: flex;
+        width: 600px;
+        height: 300px;
+        flex-direction: row;
+        align-items: flex-end;
+      }
+      #chart>div {
+        background-color: DarkSeaGreen;
+        margin: 5px;
+        flex-grow 1;
+        text-align: center;
+        color: white;
+      }
+    </style>
+
+  </head>
+  <body>
+    <div id="chart"></div>
+    <script type="text/javascript">
+      var chart = document.getElementById('chart');
+      var temperaturer = [16,16,18,21,25,30,33,33,30,25,20,17];
+
+      //skal nå lage høydene som en prosenter av #chart elementet
+      //altså, uansett høyeste temp, skal den være 100% av høyden, de andre følger den
+      function finnMaks() {
+        var maks = -Infinity;
+        for (var temp of temperaturer) {
+          if(temp > maks) {
+            maks = temp;
+          }
+        }
+        return maks;
+      }
+
+
+      function tegnStolper() {
+        var maks = finnMaks();
+        for (var temp of temperaturer) {
+          var prosent = temp/maks *100;
+          chart.innerHTML += `<div style="height:${prosent}%">${temp}</div>`;
+        }
+      }
+      tegnStolper();
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>eksempel 2</title>
+    <style media="screen">
+      #chart {
+        display: flex;
+        width: 500px;
+        height: 500px;
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      #chart>div {
+        background-color: DarkSeaGreen;
+        margin: 5px;
+        flex-grow 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart">
+    </div>
+    <script type="text/javascript">
+      //kan endre flex start for plassering av diagrammet
+      //kan endre direction for å snu diagrammet 90 grader, må da også endre "height" i for loopen til "width"
+      var chart = document.getElementById("chart");
+      var temperaturer = [16,16,18,21,25,30,33,33,30,25,20,17];
+
+      for(var temp of temperaturer){
+        chart.innerHTML += '<div style="height:'+temp*10+'px">'+temp+'</div>';
+      }
+    </script>
+  </body>
+</html>
