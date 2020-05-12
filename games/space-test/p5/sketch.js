@@ -1,12 +1,13 @@
 function preload(){
   // put preload code here
 }
+let obj;
+obj = new Objects;
 
 //variables
   //STARS
 var starArr = [];
   //OBJECTS
-let sun, earth;
 
 
 function setup() {
@@ -14,7 +15,6 @@ function setup() {
   // put setup code here
   noStroke();
   generateStars();
-  generateObjects();
 }
 
 function draw() {
@@ -71,24 +71,6 @@ function drawStars() {
   for (var i = 0; i < starArr.length; i++) {
     fill(starColor);
     circle(starArr[i][0],starArr[i][1],starArr[i][2]);
-  }
-}
-
-//OBJECTS
-function generateObjects() {
-  sun = {
-    pos:createVector(canvas.width/2,canvas.height/2),
-    vel:createVector(0,0),
-    radius:60,
-    color:"rgb(236, 240, 56)",
-    mass:1.989e30
-  };
-  earth = {
-    pos:createVector(canvas.width/4,canvas.height/2),
-    vel:createVector(0,0),
-    radius:20,
-    color:"rgb(56, 141, 240)",
-    mass:5.972e24
   }
 }
 
