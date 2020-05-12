@@ -1,18 +1,27 @@
 function Earth() {
-  this.update = function() {
-    // acc
-    var gravPull = force.gravPull(obj.earth.mass,obj.sun.mass,obj.earth.pos.x, obj.earth.pos.y,obj.sun.pos.x, obj.sun.pos.y);
-    obj.earth.vel.x += gravPull.x;
-    obj.earth.vel.y += gravPull.y;
-
-
+  var planet = obj.earth;
+  this.update = function(plant) {
+    // accelerate towards every object
+    var addedVel = {
+      x:0,
+      y:0
+    }
+    for (item in obj.list) {
+      if (obj.list[item].mass !== planet.mass) {
+        var gravPull = force.gravPull(planet.mass,obj.list[item].mass,planet.pos.x,planet.pos.y,obj.list[item].pos.x,obj.list[item].pos.y);
+        addedVel.x += gravPull.x;
+        addedVel.y += gravPull.y;
+      }
+    }
+    planet.vel.x += addedVel.x;
+    planet.vel.y += addedVel.y;
 
     // movement
-    obj.earth.pos.x += obj.earth.vel.x;
-    obj.earth.pos.y += obj.earth.vel.y;
+    planet.pos.x += planet.vel.x;
+    planet.pos.y += planet.vel.y;
   }
-  this.draw = function() {
-    fill(obj.earth.color);
-    circle(obj.earth.pos.x,obj.earth.pos.y,obj.earth.radius);
+  this.draw = function(plant) {
+    fill(planet.color);
+    circle(planet.pos.x,planet.pos.y,planet.radius);
   }
 }
