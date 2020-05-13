@@ -24,7 +24,7 @@ function Stars() {
         i++;
       } // stjerneglimt
       fill(starColor);
-      circle(starArr[i][0] +starArr[i][0]*zoomMul/2+offsetx/2 , starArr[i][1] +starArr[i][1]*zoomMul/2+offsety/2 , starArr[i][2] +starArr[i][2]*zoomMul/2);
+      circle(starArr[i][0] +starArr[i][0]*zoomMul/7+offsetx/7 , starArr[i][1] +starArr[i][1]*zoomMul/7+offsety/7 , starArr[i][2] +starArr[i][2]*zoomMul/7);
     }
   }
 }

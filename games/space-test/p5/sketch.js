@@ -51,9 +51,15 @@ function draw() {
   obj.update(obj.earth);
   obj.draw(obj.earth);
 
-    // moon
-  obj.update(obj.moon);
-  obj.draw(obj.moon);
+    // planety
+  obj.update(obj.planety);
+  obj.draw(obj.planety);
+
+    // musk
+  obj.update(obj.musk);
+  obj.draw(obj.musk);
+
+
   //frameRate(0)
   // CHECK FOR MOVING WITH CONTROLLER
   controller();
@@ -113,6 +119,7 @@ function mouseWheel(event) { // gives response positive or negative
 
 
     // LIMIT MOVING
+    /*
     if (offsetx > 0) {
       offsetx = 0;
     }
@@ -125,4 +132,5 @@ function mouseWheel(event) { // gives response positive or negative
     if (offsety < -900*zoomMul) {
       offsety = -900*zoomMul
     }
+    */
   }

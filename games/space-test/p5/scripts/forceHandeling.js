@@ -1,6 +1,6 @@
 function ForceHandeling() {
   // all forces.
-  var massMul = 10e-16; // multiplier to account for masses and distances
+  var massMul = 1//10e-16; // multiplier to account for masses and distances
 
 
   // GRAVITY
@@ -15,8 +15,7 @@ function ForceHandeling() {
   this.gravPull = function(m1,m2,posx1,posy1,posx2,posy2,r1,r2) {
     distx = Number(posx2-posx1); // safety distance x axis
     disty = Number(posy2-posy1); // safety distance y axis
-    var r = Math.hypot(distx,disty); // abs distance
-
+    var r = Math.hypot(distx,disty)*5e7; // abs distance
 
     var gravForce = force.gravity(m1,m2,r);
 
