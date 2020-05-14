@@ -19,20 +19,28 @@ function Objects() {
       name:"earth"
     },
     this.planety = {
-      pos:createVector(canvas.width*2,canvas.height*2),
-      vel:createVector(0,0),
+      pos:createVector(canvas.width*8+400,canvas.height*5+400),
+      vel:createVector(-1,-5),
       radius:120,
       color:"rgb(226, 19, 168)",
       mass:5.3e27,
       name:"planety"
     },
     this.musk = {
-      pos:createVector(canvas.width*3,canvas.height*2),
-      vel:createVector(0,0),
+      pos:createVector(canvas.width*8,canvas.height*5),
+      vel:createVector(0,-5.3),
       radius:170,
       color:"rgb(214, 103, 12)",
       mass:4.5e27,
       name:"musk"
+    },
+    this.alex = {
+      pos:createVector(canvas.width*6,canvas.height*5),
+      vel:createVector(0,8),
+      radius:100,
+      color:"rgb(16, 214, 12)",
+      mass:4.5e24,
+      name:"alex"
     }
   ];
 

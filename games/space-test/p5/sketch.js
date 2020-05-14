@@ -18,7 +18,7 @@ var offsety = 0;
 
 function setup() {
   createCanvas(1440*1,826*1);
-  frameRate(60);
+  frameRate(120);
   // put setup code here
     // all imports from other scripts
   stars = new Stars;
@@ -58,7 +58,9 @@ function draw() {
     // musk
   obj.update(obj.musk);
   obj.draw(obj.musk);
-
+    // alex
+  obj.update(obj.alex);
+  obj.draw(obj.alex);
 
   //frameRate(0)
   // CHECK FOR MOVING WITH CONTROLLER
