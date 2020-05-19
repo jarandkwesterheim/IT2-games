@@ -1,6 +1,6 @@
 function Stars() {
   this.generate = function() {
-    var starCount = 1000;
+    var starCount = 1500;
     var starSizeMin = 1;
     var starSizeMax = 3;
     let starX, starY, starS;
@@ -8,8 +8,8 @@ function Stars() {
     //randomize position
     for (var i = 0; i < starCount; i++) {
       //randomize x position
-      starX = Math.floor(Math.random()*(canvas.width*1))+1; //generates stars 2x size of screen, positions in middle for futher movement around
-      starY = Math.floor(Math.random()*(canvas.height*1))+1; //--||--
+      starX = Math.floor(Math.random()*(canvas.width*1.5))+1-canvas.width/8; //generates stars 2x size of screen, positions in middle for futher movement around
+      starY = Math.floor(Math.random()*(canvas.height*1.5))+1-canvas.height/8; //--||--
       starS = Math.floor(Math.random()*(starSizeMax-starSizeMin))+1+starSizeMin;
 
       //put in array
@@ -24,7 +24,7 @@ function Stars() {
         i++;
       } // stjerneglimt
       fill(starColor);
-      circle(starArr[i][0] +starArr[i][0]*zoomMul/7+offsetx/7 , starArr[i][1] +starArr[i][1]*zoomMul/7+offsety/7 , starArr[i][2] +starArr[i][2]*zoomMul/7);
+      circle(starArr[i][0] +starArr[i][0]*zoomMul/7+offset.x/7 , starArr[i][1] +starArr[i][1]*zoomMul/7+offset.y/7 , starArr[i][2] +starArr[i][2]*zoomMul/7);
     }
   }
 }

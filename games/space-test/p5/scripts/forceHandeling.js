@@ -30,4 +30,31 @@ function ForceHandeling() {
     }
    return gravPull;
   }
+
+
+
+
+
+  // MATHS
+    // halverer vector
+  this.half = function(vector) {
+    vector.x = vector.x/2;
+    vector.y = vector.y/2;
+    return vector;
+  }
+    // speed combining
+  this.comb = function(alp, bet) {
+    let ux, uy, v1x, v2x, v1y, v2y, m1, m2;
+    v1x = obj.list[alp].vel.x;
+    v1y = obj.list[alp].vel.y;
+    m1 = obj.list[alp].mass;
+
+    v2x = obj.list[bet].vel.x;
+    v2y = obj.list[bet].vel.y;
+    m2 = obj.list[bet].mass;
+
+    ux = (m1*v1x + m2*v2x) / (m1 + m2);
+    uy = (m1*v1y + m2*v2y) / (m1 + m2);
+    return createVector(ux,uy);
+  }
 }
